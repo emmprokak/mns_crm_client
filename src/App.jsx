@@ -8,23 +8,23 @@ import 'semantic-ui-css/semantic.min.css';
 
 
 function App() {
-  const [activities, setActivities] = useState([]);
+  const [records, setRecords] = useState([]);
   const [activeItem, setActiveItem] = useState('Overview');
 
-  useEffect(() => {
-      const getData = async () => {
-        try{
-          const response = await RequestService.getAllAccounts();
-          setActivities(response);
+  // useEffect(() => {
+  //     const getData = async () => {
+  //       try{
+  //         const response = await RequestService.getAllAccounts();
+  //         setActivities(response);
 
-        }catch(err){
-         Logger.log(err);
-        }
+  //       }catch(err){
+  //        Logger.log(err);
+  //       }
           
-      }
+  //     }
         
-      getData();
-  }, []);
+  //     getData();
+  // }, []);
 
   function getNavItems(){
     return [
@@ -41,8 +41,8 @@ function App() {
   }
 
   async function retrieveRecords(objectType){
-    let records = await RequestService.getAllRecords(objectType.toLowerCase());
-    setActivities(records);
+    const recordsCollection = await RequestService.getAllRecords(objectType.toLowerCase());
+    setRecords(recordsCollection);
 
     // switch(objectType){
     //   case "Account":
@@ -88,7 +88,7 @@ function App() {
 
       {activeItem !== 'Overview' ? 
         <div className='tabular-view-container'>
-          <TabularView recordList={activities} objectName={activeItem} />
+          <TabularView recordList={records} objectName={activeItem} />
         </div>
         :
         <div></div>

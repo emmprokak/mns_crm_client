@@ -3,6 +3,7 @@ import { Logger } from "../service/Logger";
 import TabularRow from "./TabularRow";
 import { useEffect } from "react";
 import LabelMapper from "../labels/LabelMapper";
+import Parse from "../transform/Parse";
 
 function TabularView({recordList, objectName}){
 
@@ -42,6 +43,7 @@ function TabularView({recordList, objectName}){
 
                 {recordList.map(row => (
                     <Table.Row key={"tRow" + row.id}>
+
                         {fields.map(col => (
                             <Table.Cell
                                 collapsing={false}
@@ -49,10 +51,11 @@ function TabularView({recordList, objectName}){
                                 verticalAlign="middle"
                                 key={"rec" + row["id"] + col}
                             >
-                                {row[col]}
+                                {Parse.parseTableValue(row[col], col, objectName)}
                             </Table.Cell>
                             ))
                         }
+
                     </Table.Row>
                     ))
                 }

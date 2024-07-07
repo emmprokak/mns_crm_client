@@ -4,10 +4,11 @@
   background-color: rgb(251, 244, 244);
   box-sizing: border-box;
   text-decoration: none !important;
+  border-bottom: 3px solid transparent;
 }
 
 .nav-link:hover {
-  border-bottom: 3px solid var(--accentColor, rgb(49, 108, 244));
+  border-bottom: 3px solid rgb(49, 108, 244);
   background-color: rgb(251, 244, 244);
   text-decoration: none !important;
   cursor: pointer;

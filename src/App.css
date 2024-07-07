@@ -1,0 +1,19 @@
+.nav-link {
+  padding: 10px 15px;
+  margin: 5px 5px;
+  background-color: rgb(251, 244, 244);
+  box-sizing: border-box;
+  text-decoration: none !important;
+}
+
+.nav-link:hover {
+  border-bottom: 3px solid var(--accentColor, rgb(49, 108, 244));
+  background-color: rgb(251, 244, 244);
+  text-decoration: none !important;
+  cursor: pointer;
+}
+
+.tabular-view-container{
+  width: 80%;
+  padding: 10px 30px;
+}

@@ -33,7 +33,8 @@ class LabelMapper {
         "contactPhone" : "Contact Phone",
         "contactRole" : "Contact Role",
         "contactEmail" : "Contact Email",
-        "status" : "Status"
+        "status" : "Status",
+        "id" : "Id"
     }
 }
 

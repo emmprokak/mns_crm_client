@@ -1,0 +1,87 @@
+.left-div {
+    display: inline-block;
+    width: 50%;
+    padding: 5px 10px;
+    margin-top: 5px;
+
+  }
+
+.right-div{
+    display: inline-block;
+    width: 50%;
+    padding: 5px 10px;
+    margin-top: 5px;
+  }
+
+.field-container{
+  box-sizing: border-box;
+  border-bottom: 2px solid gray;
+  border-radius: 10px;
+  box-shadow: 1px;
+  padding: 10px 15px;
+  min-height: 60px;
+  padding-bottom: -10px;
+}
+
+.field-group-container{
+  box-sizing: border-box;
+  border: 2px solid grey;
+  border-radius: 15px;;
+  padding: 5px 10px;
+  width: 65%;
+  margin: 10px 15px;;
+}
+
+.field-label{
+  color: rgb(25, 25, 25);
+}
+
+.field-value{
+  border-bottom: 1px solid transparent;
+  padding-bottom: 3px;
+}
+
+.field-value:hover{
+  border-bottom: 1px solid black;
+  padding-bottom: 3px;
+}
+
+.entity-header{
+  border: 2px solid red;
+  border-radius: 15px;
+  min-height: 100px;
+  /* background-color: whitesmoke; */
+  padding: 10px;
+  margin: 20px;
+  width: 35%;
+  display: inline-block;
+}
+
+.entity-header-object{
+  font-size: 600;
+  font-size: 2em;
+  /* padding-bottom: 4px; */
+  border-radius: 15px;
+  /* border-bottom: 1px solid black; */
+}
+
+.entity-header-preview-fields{
+  margin-top: 10px;
+  font-size: 1.2em;
+}
+
+.actions-container{
+  display: flex;
+  border-radius: 15px;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 20px;
+}
+
+
+.header-top-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

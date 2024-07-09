@@ -1,11 +1,12 @@
 import { Tab, Table, TableBody, TableCell, TableHeader, TableHeaderCell, TableRow } from "semantic-ui-react";
 import { Logger } from "../service/Logger";
 import TabularRow from "./TabularRow";
+import TabularCell from "./TabularCell";
 import { useEffect } from "react";
 import LabelMapper from "../labels/LabelMapper";
 import Parse from "../transform/Parse";
 
-function TabularView({recordList, objectName}){
+function TabularView({recordList, objectName, recordSelected}){
 
     if(!recordList){
         return;
@@ -24,6 +25,15 @@ function TabularView({recordList, objectName}){
         }
 
         return result;
+    }
+
+    function fieldClicked(event){
+        Logger.log(event.target.id);
+        const compositeValue = event.target.id;
+        const fieldName = compositeValue.split(":")[0];
+        const recordId = compositeValue.split(":")[1];
+        
+        recordSelected(fieldName, objectName, recordId);
     }
 
     return (
@@ -50,8 +60,10 @@ function TabularView({recordList, objectName}){
                                 textAlign="center"
                                 verticalAlign="middle"
                                 key={"rec" + row["id"] + col}
-                            >
-                                {Parse.parseTableValue(row[col], col, objectName)}
+                            >                                
+
+                                <TabularCell recordObject={row} fieldName={col} cellClicked={fieldClicked}/>
+                                    
                             </Table.Cell>
                             ))
                         }

@@ -28,6 +28,13 @@ class RequestService{
         const response =  await RequestUtil.makeHttpRequest(request);
         return response.data;
     }
+
+    static async getSingleRecord(objectName, recordId){
+        const request = await RequestConstructor.getEntitySingleRecordRequest(this.IP_ADDRESS, this.PORT, this.PROTOCOL, objectName.toLowerCase(), recordId);
+    
+        const response = await RequestUtil.makeHttpRequest(request);
+        return response.data;
+    }
 }
 
 export default RequestService;

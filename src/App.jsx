@@ -5,26 +5,15 @@ import RequestService from './service/RequestService';
 import TabularView from './components/TabularView';
 import { Logger } from './service/Logger';
 import 'semantic-ui-css/semantic.min.css';
+import EntityPage from './components/EntryPage';
 
 
 function App() {
   const [records, setRecords] = useState([]);
   const [activeItem, setActiveItem] = useState('Overview');
-
-  // useEffect(() => {
-  //     const getData = async () => {
-  //       try{
-  //         const response = await RequestService.getAllAccounts();
-  //         setActivities(response);
-
-  //       }catch(err){
-  //        Logger.log(err);
-  //       }
-          
-  //     }
-        
-  //     getData();
-  // }, []);
+  const [singleRecordView, setSingleRecordView] = useState(false);
+  const [currentObjectName, setCurrentObjectName] = useState("");
+  const [currentObjectId, setCurrentObjectId] = useState("");
 
   function getNavItems(){
     return [
@@ -38,6 +27,9 @@ function App() {
   function handleItemClick(event){
     setActiveItem(event.target.text);
     retrieveRecords(event.target.text);
+    setSingleRecordView(false);
+    setCurrentObjectId("");
+    setCurrentObjectName("");
   }
 
   async function retrieveRecords(objectType){
@@ -55,6 +47,12 @@ function App() {
     //     records = await RequestService.getAllLeads();
     //     break;  
     // }
+  }
+
+  function recordClicked(fieldName, objectName, recordId){
+    setSingleRecordView(true);
+    setCurrentObjectId(recordId);
+    setCurrentObjectName(objectName);
   }
   
   return (
@@ -80,15 +78,22 @@ function App() {
 
       </Grid>
 
-      {/* <List>
-        {activities.map((act) => (
-          <List.Item key={act.Id}>{act.companyName}</List.Item>
-        ))}
-      </List> */}
 
-      {activeItem !== 'Overview' ? 
+      {
+        singleRecordView ? 
+        <div>
+          <EntityPage objectName={currentObjectName} entryId={currentObjectId}/>
+        </div>
+        :
+        <div>
+
+        </div>
+      }
+
+
+      {activeItem !== 'Overview' && !singleRecordView ? 
         <div className='tabular-view-container'>
-          <TabularView recordList={records} objectName={activeItem} />
+          <TabularView recordList={records} objectName={activeItem} recordSelected={recordClicked}/>
         </div>
         :
         <div></div>

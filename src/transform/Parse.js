@@ -3,6 +3,7 @@ class Parse {
         if(fieldName === "birthdate"){
             return val.slice(0, 10);
         }
+
         return val;
     }
 }

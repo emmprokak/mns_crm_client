@@ -1,10 +1,15 @@
 import "./css/EntityPage.css";
 import EntityAction from "./EntityAction";
 
-function EntityHeader({objectName, record, fieldCollection}){
+function EntityHeader({objectName, record, fieldCollection, entryActionClicked}){
 
     const viewableFields = ["companyName", "description", "website", "firstName", "lastName", "contactPerson", "status"];
     const standardActions = ["Create", "Edit", "Delete"];
+
+    function actionClicked(actionType){
+        entryActionClicked(objectName, record, actionType);
+    }
+
 
     return (
         <div className="header-top-container">
@@ -17,7 +22,7 @@ function EntityHeader({objectName, record, fieldCollection}){
                     {
                         fieldCollection.map(field => (
                             viewableFields.includes(field) ?
-                            <div key={"headd-" + field}  style={{marginRight: "20px;"}}>
+                            <div key={"headd-" + field}  style={{marginRight: "20px"}}>
                                 <span key={"head-" + field}>{record[field]}</span> 
                                 <br/>
                             </div>
@@ -31,7 +36,7 @@ function EntityHeader({objectName, record, fieldCollection}){
             <div className="actions-container">
                 {
                     standardActions.map(act => (
-                        <EntityAction key={act} objectName={objectName} entryId={record["id"]} actionLabel={act}/>
+                        <EntityAction key={act} objectName={objectName} entryId={record["id"]} actionLabel={act} actionClicked={actionClicked}/>
                     ))
                 }
             </div>

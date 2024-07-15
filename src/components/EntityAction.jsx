@@ -2,7 +2,7 @@ import { Button } from "semantic-ui-react";
 import { Logger } from "../service/Logger";
 import { useEffect } from "react";
 
-function EntityAction({actionLabel, objectName, entryId}){
+function EntityAction({actionLabel, objectName, entryId, actionClicked}){
 
     // useEffect(() => {
     //     setActionToBePerformed();
@@ -10,15 +10,15 @@ function EntityAction({actionLabel, objectName, entryId}){
 
     function performAction(){
         const createNewEntry = () => {
-            Logger.log("create");
+            actionClicked("create");
         };
 
         const editEntry = () => {
-            Logger.log("edit");
+            actionClicked("edit");
         };
 
         const deleteEntry = () => {
-            Logger.log("delete");
+            actionClicked("delete");
         };
 
        switch(actionLabel){

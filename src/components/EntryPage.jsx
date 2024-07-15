@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react";
+import { act, useEffect, useState } from "react";
 import RequestService from "../service/RequestService";
 import EntityPageField from "./EntityPageField";
 import EntityHeader from "./EntityHeader";
+import { Logger } from "../service/Logger";
+import CreateAccount from "./entry-specific/ModalController";
+import ModalController from "./entry-specific/ModalController";
 
 
 function EntityPage({objectName, entryId}){
@@ -10,6 +13,9 @@ function EntityPage({objectName, entryId}){
     const [firstColFields, setFirstColFields] = useState([]);
     const [secondColFields, setSecondColFields] = useState([]);
     const [fieldTotal, setFieldTotal] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [chosenActionType, setChosenActionType] = useState("");
+
 
     const nonRenderableFields = ["id"];
 
@@ -47,7 +53,7 @@ function EntityPage({objectName, entryId}){
             }else{
                 rightList.push(field);
             }
-            
+
             total.push(field);
             idx++;
         }
@@ -57,29 +63,50 @@ function EntityPage({objectName, entryId}){
         setFieldTotal(total);
     }
 
+    function actionClicked(objectName, entry, actionType){
+        Logger.log(`${objectName}, ${entry}, ${actionType}`);
+        setChosenActionType(actionType);
+        setShowModal(true);
+    }
+
     return(
         <div>
-            <div>
-                <EntityHeader objectName={objectName} record={entry} fieldCollection={fieldTotal}/>
-            </div>
-            <div className="field-group-container">
-                <div className="left-div">
-                    {
-                        firstColFields.map(field => (
-                            <EntityPageField key={field} fieldName={field} fieldValue={entry[field]} />
-                        ))
-                    }
-                </div>
+            {
+                showModal ? 
+                <ModalController modalClosed={() => {setShowModal(false)}}
+                 triggerButton={null}
+                 objectName={objectName}
+                 entry={entry}
+                 actionType={chosenActionType}
+                />
+                :
+                <div></div>
+            }
 
-                <div className="right-div">
-                    {
-                        secondColFields.map(field => (
-                            <EntityPageField key={field} fieldName={field} fieldValue={entry[field]} />
-                        ))
-                    }
+            <div>
+                <div>
+                    <EntityHeader objectName={objectName} record={entry} fieldCollection={fieldTotal} entryActionClicked={actionClicked}/>
+                </div>
+                <div className="field-group-container">
+                    <div className="left-div">
+                        {
+                            firstColFields.map(field => (
+                                <EntityPageField key={field} fieldName={field} fieldValue={entry[field]} />
+                            ))
+                        }
+                    </div>
+
+                    <div className="right-div">
+                        {
+                            secondColFields.map(field => (
+                                <EntityPageField key={field} fieldName={field} fieldValue={entry[field]} />
+                            ))
+                        }
+                    </div>
                 </div>
             </div>
         </div>
+           
     )
 }
 

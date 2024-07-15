@@ -32,7 +32,7 @@ function TabularView({recordList, objectName, recordSelected}){
         const compositeValue = event.target.id;
         const fieldName = compositeValue.split(":")[0];
         const recordId = compositeValue.split(":")[1];
-        
+        Logger.log(`record selected with values = ${fieldName}, ${objectName}, ${recordId}`)
         recordSelected(fieldName, objectName, recordId);
     }
 

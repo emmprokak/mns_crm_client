@@ -21,6 +21,15 @@ function ModalController({modalClosed, triggerButton, objectName, entry, actionT
       modalClosed();
     }
 
+    // TODO: evaluate if needed
+    function getStandardButtons(){
+      return (
+        <div>
+
+        </div>
+      )
+    }
+
   return (
     <Modal
       open={open}
@@ -31,17 +40,22 @@ function ModalController({modalClosed, triggerButton, objectName, entry, actionT
       <ModalHeader>{`${Parse.firstLetterCapital(actionType)} ${objectName}`}</ModalHeader>
       <ModalContent image scrolling>
         
-        <ModalContentHandler entry={entry} actionType={actionType} />
+        <ModalContentHandler entry={entry} actionType={actionType} entryName={objectName} />
        
       </ModalContent>
-      <ModalActions>
-        <Button onClick={() => setOpen(false)} primary>
-          Proceed <Icon name='chevron right' />
-        </Button>
-        <Button onClick={() => setOpen(false)} primary>
-          Proceed <Icon name='chevron right' />
-        </Button>
-      </ModalActions>
+
+      <div style={{border : "1px solid gray", borderRadius: "10px", padding: "20px 10px", textAlign: "right"}}>
+        <ModalActions>
+          <Button onClick={() => setOpen(false)}  color='gray'>
+            Cancel 
+          </Button>
+
+          <Button onClick={() => setOpen(false)}  color='blue'>
+            Create
+          </Button>
+        </ModalActions>
+      </div>
+      
     </Modal>
   )
 }

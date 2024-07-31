@@ -6,6 +6,21 @@ class RequestService{
     static IP_ADDRESS = "localhost";
     static PROTOCOL = "http";
     static PORT = "8080";
+
+    static async getIndustryOptions(){
+        return [
+            {text: "IT", value: "IT"},
+            {text: "Food", value: "Food"},
+            {text: "Retail", value: "Retail"}
+        ]
+    }
+
+    static async getAccountTypes(){
+        return [
+            {text: "person", value: "person"},
+            {text: "company", value: "company"},
+        ]
+    }
     
     static async getAllAccounts(){
        return await this.getAllRecords("account")

@@ -1,64 +1,35 @@
 import { useEffect, useState } from "react";
 import EntityPageField from "./EntityPageField";
+import CreateAccountModal from "./entry-specific/CreateAccountModal";
+import { Logger } from "../service/Logger";
 
-function ModalContentHandler({entry, actionType}){
-
-    const [leftColFields, setLeftColFields] = useState([]);
-    const [rightColFields, setRightColFields] = useState([]);
+function ModalContentHandler({entry, actionType, entryName}){
+    const [createAccount, setCreateAccount] = useState(false);
 
     useEffect(() => {
-        seperateFieldsIntoTwoGroups();
-    }, [entry])
+        updateContentType();
+    }, [])
 
-    function seperateFieldsIntoTwoGroups(){
-        if(!entry){
+    function updateContentType(){
+        Logger.log(`${actionType} ^ ${entryName}`);
+        if(actionType === "create" && entryName === "Account"){
+            setCreateAccount(true);
             return;
         }
 
-        let idx = 0;
-        const leftList = [];
-        const rightList = [];
-        const total = [];
-
-        for(let field of Object.keys(entry)){
-            // if(nonRenderableFields.includes(field)){
-            //     continue;
-            // }
-
-            if(idx % 2 === 0){
-                leftList.push(field);
-            }else{
-                rightList.push(field);
-            }
-
-            total.push(field);
-            idx++;
-        }
-
-        setLeftColFields(leftList);
-        setRightColFields(rightList);
+        setCreateAccount(false);
     }
-    
+
     return (
         <div>
-              <div className="field-group-container">
-                    <div className="left-div">
-                        {
-                            leftColFields.map(field => (
-                                <EntityPageField key={field} fieldName={field} fieldValue={entry[field]} />
-                            ))
-                        }
-                    </div>
 
-                    <div className="right-div">
-                        {
-                            rightColFields.map(field => (
-                                <EntityPageField key={field} fieldName={field} fieldValue={entry[field]} />
-                            ))
-                        }
-                    </div>
-                </div>
-
+            {
+                createAccount ? 
+                <CreateAccountModal entry={entry}/>
+                :
+                <div></div>
+            }
+                  
         </div>
     )
 }

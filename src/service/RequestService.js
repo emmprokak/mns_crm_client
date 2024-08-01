@@ -1,6 +1,7 @@
 import axios from "axios";
 import RequestConstructor from '../service/RequestContructor';
 import RequestUtil from "./RequestUtil";
+import { Logger } from "./Logger";
 
 class RequestService{
     static IP_ADDRESS = "localhost";
@@ -45,11 +46,20 @@ class RequestService{
     }
 
     static async getSingleRecord(objectName, recordId){
-        const request = await RequestConstructor.getEntitySingleRecordRequest(this.IP_ADDRESS, this.PORT, this.PROTOCOL, objectName.toLowerCase(), recordId);
+        const request = RequestConstructor.getEntitySingleRecordRequest(this.IP_ADDRESS, this.PORT, this.PROTOCOL, objectName.toLowerCase(), recordId);
     
         const response = await RequestUtil.makeHttpRequest(request);
         return response.data;
     }
+
+    static async sendCreateEntry(objectName, entry){
+        const request = RequestConstructor.getEntityCreateRequest(this.IP_ADDRESS, this.PORT, this.PROTOCOL, objectName);
+        Logger.log(`create req = ${request}`)
+        const response = await RequestUtil.makeHttpRequest(request, "POST", entry);
+        return response;
+    }
+
+    //TODO create update and delete operaitons
 }
 
 export default RequestService;

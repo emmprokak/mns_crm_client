@@ -3,8 +3,7 @@ import RequestService from "../service/RequestService";
 import EntityPageField from "./EntityPageField";
 import EntityHeader from "./EntityHeader";
 import { Logger } from "../service/Logger";
-import CreateAccount from "./entry-specific/ModalController";
-import ModalController from "./entry-specific/ModalController";
+import ModalController from "./ModalController";
 
 
 function EntityPage({objectName, entryId}){

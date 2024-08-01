@@ -1,13 +1,15 @@
-import { Grid, Header, Input, Segment } from "semantic-ui-react";
+import { Grid, Header, Segment } from "semantic-ui-react";
 import Combobox from "../data-type components/Combobox";
 import { useEffect, useState } from "react";
 import RequestService from "../../service/RequestService";
 import { Logger } from "../../service/Logger";
 import Checkbox from "../data-type components/Checkbox";
+import TextInput from "../data-type components/TextInput";
 
-function CreateAccountModal({acc}){
+function CreateAccountModal({acc, bubbleUpFinalEntry}){
     const [industryOptions, setIndustryOptions] = useState([]);
     const [accountTypeOptions, setAccountTypeOptions] = useState([]);
+    const [accDetails, setAccDetails] = useState({});
 
     const UPDATE_ACCOUNT_ACTION = "updateAccount";
 
@@ -29,8 +31,12 @@ function CreateAccountModal({acc}){
        
     }, []);
 
+
     function updateAccount(updateEvent){
-        Logger.log(updateEvent);
+        let dataObject = JSON.parse(JSON.stringify(accDetails));
+        dataObject[updateEvent.source] = updateEvent.value;
+        setAccDetails(dataObject);
+        bubbleUpFinalEntry(dataObject);
     }
 
 
@@ -42,14 +48,13 @@ function CreateAccountModal({acc}){
                     <Grid.Column > 
                         <div>
                             <label htmlFor="" style={{display: "block", paddingLeft: "5px"}}>Company Name</label>
-                            <Input placeholder='Company Name' style={{border: "1px solid black", borderRadius: "5px"}}/>
+                            <TextInput placeholder='Company Name'  dataId="companyName" bubbleUpUpdate={updateAccount}/>
                         </div>
                     </Grid.Column>
 
                     <Grid.Column>
                         <div>
                             <label htmlFor="" style={{display: "block", paddingLeft: "5px"}}>Industry</label>
-                            {/* <Input placeholder='Industry' style={{border: "1px solid black", borderRadius: "5px"}}/> */}
                             <Combobox options={industryOptions} bubbleUpUpdate={updateAccount} 
                                 dataId="industry" actionName={UPDATE_ACCOUNT_ACTION}/>
                         </div>
@@ -61,14 +66,15 @@ function CreateAccountModal({acc}){
                         <div>
                             <label htmlFor="" style={{display: "block", paddingLeft: "5px"}}>Is Active</label>
                             <Checkbox bubbleUpUpdate={updateAccount} 
-                                displayText="Active" defaultValue={false} dataId="active" actionName={UPDATE_ACCOUNT_ACTION}/>
+                                displayText="Active" defaultValue={false} dataId="active" 
+                                actionName={UPDATE_ACCOUNT_ACTION} />
                         </div>
                     </Grid.Column>
 
                     <Grid.Column>
                         <div>
                             <label htmlFor="" style={{display: "block", paddingLeft: "5px"}}>Revenue</label>
-                            <Input placeholder='Revenue' style={{border: "1px solid black", borderRadius: "5px"}}/>
+                            <TextInput placeholder='Revenue' bubbleUpUpdate={updateAccount} dataId="revenue"/>
                         </div>
                     </Grid.Column>
                 </Grid.Row>
@@ -78,14 +84,14 @@ function CreateAccountModal({acc}){
                     <Grid.Column>
                         <div>
                             <label htmlFor="" style={{display: "block", paddingLeft: "5px"}}>Billing Address</label>
-                            <Input placeholder='Billing Address' style={{border: "1px solid black", borderRadius: "5px"}}/>
+                            <TextInput placeholder='Billing Address' bubbleUpUpdate={updateAccount} dataId="billingAddress"/>
                         </div>
                     </Grid.Column>
 
                     <Grid.Column>
                         <div>
                             <label htmlFor="" style={{display: "block", paddingLeft: "5px"}}>Description</label>
-                            <Input placeholder='Description' style={{border: "1px solid black", borderRadius: "5px"}}/>
+                            <TextInput placeholder='Description' bubbleUpUpdate={updateAccount} dataId="description"/>
                         </div>
                     </Grid.Column>
                 </Grid.Row>
@@ -103,7 +109,7 @@ function CreateAccountModal({acc}){
                     <Grid.Column>
                         <div>
                             <label htmlFor="" style={{display: "block", paddingLeft: "5px"}}>Website</label>
-                            <Input placeholder='Website' style={{border: "1px solid black", borderRadius: "5px"}}/>
+                            <TextInput placeholder='Website' bubbleUpUpdate={updateAccount} dataId="website"/>
                         </div>
                     </Grid.Column>
                 </Grid.Row>
@@ -113,14 +119,14 @@ function CreateAccountModal({acc}){
                     <Grid.Column>
                         <div>
                             <label htmlFor="" style={{display: "block", paddingLeft: "5px"}}>Client Rating</label>
-                            <Input placeholder='Client Rating' style={{border: "1px solid black", borderRadius: "5px"}}/>
+                            <TextInput placeholder='Client Rating' bubbleUpUpdate={updateAccount} dataId="clientRating"/>
                         </div>
                     </Grid.Column>
 
                     <Grid.Column>
                         <div>
                             <label htmlFor="" style={{display: "block", paddingLeft: "5px"}}>VAT</label>
-                            <Input placeholder='VAT' style={{border: "1px solid black", borderRadius: "5px"}}/>
+                            <TextInput placeholder='VAT' bubbleUpUpdate={updateAccount} dataId="vat"/>
                         </div>
                     </Grid.Column>
                 </Grid.Row>

@@ -3,7 +3,7 @@ import EntityPageField from "./EntityPageField";
 import CreateAccountModal from "./entry-specific/CreateAccountModal";
 import { Logger } from "../service/Logger";
 
-function ModalContentHandler({entry, actionType, entryName}){
+function ModalContentHandler({entry, actionType, entryName, bubbleUpFinalEntry}){
     const [createAccount, setCreateAccount] = useState(false);
 
     useEffect(() => {
@@ -25,7 +25,7 @@ function ModalContentHandler({entry, actionType, entryName}){
 
             {
                 createAccount ? 
-                <CreateAccountModal entry={entry}/>
+                <CreateAccountModal entry={entry} bubbleUpFinalEntry={bubbleUpFinalEntry}/>
                 :
                 <div></div>
             }

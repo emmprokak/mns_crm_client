@@ -20,7 +20,6 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
     const nonRenderableFields = ["id"];
 
     useEffect(() => {
-        Logger.log("effect run");
         const loadData = async () => {
             const result = await RequestService.getSingleRecord(objectName, entryId);
             console.log(entry)

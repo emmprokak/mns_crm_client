@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import EntityPageField from "./EntityPageField";
-import CreateAccountModal from "./entry-specific/CreateAccountModal";
+import CreateAccountModal from "./entry-specific/CreateUpdateAccountModal";
 import { Logger } from "../service/Logger";
 import DeleteModal from "./DeleteModal";
 
 function ModalContentHandler({entry, actionType, entryName, bubbleUpFinalEntry}){
-    const [createAccount, setCreateAccount] = useState(false);
+    const [createOrUpdateAccount, setCreateOrUpdateAccount] = useState(false);
     const [genericDelete, setGenericDelete] = useState(false);
 
     useEffect(() => {
@@ -14,8 +14,8 @@ function ModalContentHandler({entry, actionType, entryName, bubbleUpFinalEntry})
 
     function updateContentType(){
         Logger.log(`${actionType} ^ ${entryName}`);
-        if(actionType === "create" && entryName === "Account"){
-            setCreateAccount(true);
+        if((actionType === "create" || actionType === "update") && entryName === "Account"){
+            setCreateOrUpdateAccount(true);
             return;
         }
 
@@ -24,7 +24,7 @@ function ModalContentHandler({entry, actionType, entryName, bubbleUpFinalEntry})
             return;
         }
 
-        setCreateAccount(false);
+        setCreateOrUpdateAccount(false);
         setGenericDelete(false);
     }
 
@@ -32,8 +32,8 @@ function ModalContentHandler({entry, actionType, entryName, bubbleUpFinalEntry})
         <div>
 
             {
-                createAccount ? 
-                <CreateAccountModal entry={entry} bubbleUpFinalEntry={bubbleUpFinalEntry}/>
+                createOrUpdateAccount ? 
+                <CreateAccountModal entry={entry} bubbleUpFinalEntry={bubbleUpFinalEntry} actionType={actionType}/>
                 :
                 <div></div>
             }

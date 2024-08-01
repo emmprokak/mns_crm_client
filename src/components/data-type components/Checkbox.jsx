@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FormCheckbox } from "semantic-ui-react";
 import EventGenerator from "../../events/EventGenerator";
+import { Logger } from "../../service/Logger";
 
-function Checkbox({displayText, bubbleUpUpdate, defaultValue = false, dataId, actionName}){
+function Checkbox({displayText, bubbleUpUpdate, defaultValue = false, dataId, actionName, value}){
     const [checked, setChecked] = useState(defaultValue);
+
+    useEffect(() => {
+        setChecked(value);
+    }, [value]);
 
     function checkBoxStateChanged(){
         const newValue = !checked;
@@ -13,7 +18,7 @@ function Checkbox({displayText, bubbleUpUpdate, defaultValue = false, dataId, ac
 
     return (
         <div>
-            <FormCheckbox label={displayText} value={checked} onChange={checkBoxStateChanged}/>
+            <FormCheckbox label={displayText} checked={checked} onChange={checkBoxStateChanged}/>
         </div>
     )
 }

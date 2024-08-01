@@ -1,10 +1,11 @@
+import { Logger } from "../service/Logger";
 import "./css/EntityPage.css";
 import EntityAction from "./EntityAction";
 
 function EntityHeader({objectName, record, fieldCollection, entryActionClicked}){
 
     const viewableFields = ["companyName", "description", "website", "firstName", "lastName", "contactPerson", "status"];
-    const standardActions = ["Create", "Edit", "Delete"];
+    const standardActions = ["Create", "Update", "Delete"];
 
     function actionClicked(actionType){
         entryActionClicked(objectName, record, actionType);

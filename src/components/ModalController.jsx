@@ -22,7 +22,8 @@ function ModalController({modalClosed, triggerButton, objectName, entry, actionT
 
     const buttonConfig = {
       "create" : "blue",
-      "delete" : "red"
+      "delete" : "red",
+      "update" : "orange"
     }
 
     async function performAction(){

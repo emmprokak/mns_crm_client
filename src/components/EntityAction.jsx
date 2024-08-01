@@ -14,7 +14,7 @@ function EntityAction({actionLabel, objectName, entryId, actionClicked}){
         };
 
         const editEntry = () => {
-            actionClicked("edit");
+            actionClicked("update");
         };
 
         const deleteEntry = () => {
@@ -25,7 +25,7 @@ function EntityAction({actionLabel, objectName, entryId, actionClicked}){
         case "Create":
             createNewEntry();
             break;
-        case "Edit":
+        case "Update":
             editEntry();
             break;
         case "Delete":

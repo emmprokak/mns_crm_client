@@ -4,6 +4,9 @@ class Parse {
             return "-";
         }
 
+        if(fieldName === "active"){
+            return val ? "yes" : "no";
+        }
 
         if(fieldName === "birthdate"){
             return val.slice(0, 10);

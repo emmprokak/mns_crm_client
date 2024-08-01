@@ -35,24 +35,22 @@ function App() {
   async function retrieveRecords(objectType){
     const recordsCollection = await RequestService.getAllRecords(objectType.toLowerCase());
     setRecords(recordsCollection);
-
-    // switch(objectType){
-    //   case "Account":
-    //     records = await RequestService.getAllAccounts();
-    //     break;
-    //   case "Contact":
-    //     records = await RequestService.getAllContacts();
-    //     break;    
-    //   case "Lead":
-    //     records = await RequestService.getAllLeads();
-    //     break;  
-    // }
   }
 
   function recordClicked(fieldName, objectName, recordId){
     setSingleRecordView(true);
     setCurrentObjectId(recordId);
     setCurrentObjectName(objectName);
+  }
+
+  async function displayedRecordChanged(newEntryId){
+    if(!newEntryId){
+      await retrieveRecords(currentObjectName);
+      setSingleRecordView(false);
+      return;
+    }
+
+    setCurrentObjectId(newEntryId);
   }
   
   return (
@@ -82,7 +80,7 @@ function App() {
       {
         singleRecordView ? 
         <div>
-          <EntityPage objectName={currentObjectName} entryId={currentObjectId}/>
+          <EntityPage objectName={currentObjectName} entryId={currentObjectId} bubbleUpEntryIdChange={displayedRecordChanged}/>
         </div>
         :
         <div>

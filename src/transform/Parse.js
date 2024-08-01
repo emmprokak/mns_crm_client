@@ -1,5 +1,10 @@
 class Parse {
     static parseTableValue(val, fieldName, objectName){
+        if(!val){
+            return "-";
+        }
+
+
         if(fieldName === "birthdate"){
             return val.slice(0, 10);
         }

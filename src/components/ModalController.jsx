@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   ModalHeader,
   ModalDescription,
@@ -18,10 +18,11 @@ import RequestService from '../service/RequestService';
 function ModalController({modalClosed, triggerButton, objectName, entry, actionType}){
     const [open, setOpen] = useState(true)
     const [finalEntry, setFinalEntry] = useState(null);
+    const [actionResponse, setActionResponse] = useState(null); // TODO: eval if needed
 
-    function currentModalClosed(){
-      setOpen(false);
-      modalClosed();
+    const buttonConfig = {
+      "create" : "blue",
+      "delete" : "red"
     }
 
     async function performAction(){
@@ -39,14 +40,17 @@ function ModalController({modalClosed, triggerButton, objectName, entry, actionT
           break;
       }
 
-
-      const response = await action(objectName.toLowerCase(), finalEntry);
-      setOpen(false);
+      const entryDetails = actionType === "delete" ? entry : finalEntry;
+      const response = await action(objectName.toLowerCase(), entryDetails);
 
       Logger.log(response);
-      if(response.data.id){
+      // if(response.data.id){
         // redirect to account
-      }
+      setActionResponse(response.data);
+      modalClosed(response.data);
+      setOpen(false);
+
+      // }
     }
 
     async function createEntry(objName, finalEntry){
@@ -61,7 +65,6 @@ function ModalController({modalClosed, triggerButton, objectName, entry, actionT
       return await RequestService.sendDeleteEntry(objName, finalEntry)
     }
 
-    //TODO: figure out
     function getUpdatedEntry(entryRecord){
       setFinalEntry(entryRecord);
     }
@@ -78,7 +81,7 @@ function ModalController({modalClosed, triggerButton, objectName, entry, actionT
   return (
     <Modal
       open={open}
-      onClose={currentModalClosed}
+      onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       trigger={triggerButton}
     >
@@ -95,8 +98,8 @@ function ModalController({modalClosed, triggerButton, objectName, entry, actionT
             Cancel 
           </Button>
 
-          <Button onClick={performAction}  color='blue'>
-            Create
+          <Button onClick={performAction}  color={buttonConfig[actionType]}>
+            {Parse.firstLetterCapital(actionType)}
           </Button>
         </ModalActions>
       </div>

@@ -59,7 +59,19 @@ class RequestService{
         return response;
     }
 
-    //TODO create update and delete operaitons
+    static async sendUpdateEntry(objectName, entry){
+        const request = RequestConstructor.getEntityUpdateRequest(this.IP_ADDRESS, this.PORT, this.PROTOCOL, objectName, entry.id);
+        Logger.log(`update req = ${request}`)
+        const response = await RequestUtil.makeHttpRequest(request, "PUT", entry);
+        return response;
+    }
+
+    static async sendDeleteEntry(objectName, entry){
+        const request = RequestConstructor.getEntityDeleteRequest(this.IP_ADDRESS, this.PORT, this.PROTOCOL, objectName, entry.id);
+        Logger.log(`del req = ${request}`)
+        const response = await RequestUtil.makeHttpRequest(request, "DELETE");
+        return response;
+    }
 }
 
 export default RequestService;

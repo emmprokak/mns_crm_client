@@ -6,19 +6,21 @@ import { Logger } from "../service/Logger";
 import ModalController from "./ModalController";
 
 
-function EntityPage({objectName, entryId}){
+function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
 
     const [entry, setEntry] = useState({});
     const [firstColFields, setFirstColFields] = useState([]);
     const [secondColFields, setSecondColFields] = useState([]);
     const [fieldTotal, setFieldTotal] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [modalKey, setModalKey] = useState(0);
     const [chosenActionType, setChosenActionType] = useState("");
 
 
     const nonRenderableFields = ["id"];
 
     useEffect(() => {
+        Logger.log("effect run");
         const loadData = async () => {
             const result = await RequestService.getSingleRecord(objectName, entryId);
             console.log(entry)
@@ -63,20 +65,28 @@ function EntityPage({objectName, entryId}){
     }
 
     function actionClicked(objectName, entry, actionType){
-        Logger.log(`${objectName}, ${entry}, ${actionType}`);
         setChosenActionType(actionType);
         setShowModal(true);
+        setModalKey(modalKey + 1);
+    }
+
+    function childModalClosed(actionResponse){
+        setEntry(actionResponse);
+        bubbleUpEntryIdChange(actionResponse.id);
+        setShowModal(false);
+        setModalKey(modalKey + 1);
     }
 
     return(
         <div>
             {
                 showModal ? 
-                <ModalController modalClosed={() => {setShowModal(false)}}
+                <ModalController modalClosed={childModalClosed}
                  triggerButton={null}
                  objectName={objectName}
                  entry={entry}
                  actionType={chosenActionType}
+                 key={modalKey}
                 />
                 :
                 <div></div>

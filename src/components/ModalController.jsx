@@ -42,6 +42,8 @@ function ModalController({modalClosed, triggerButton, objectName, entry, actionT
       }
 
       const entryDetails = actionType === "delete" ? entry : finalEntry;
+      Logger.log("sending request for ");
+      Logger.log(entryDetails);
       const response = await action(objectName.toLowerCase(), entryDetails);
 
       Logger.log(response);

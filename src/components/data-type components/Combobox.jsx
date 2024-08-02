@@ -33,6 +33,7 @@ function Combobox({options, bubbleUpUpdate, dataId, actionName, value}){
                 placeholder='None'
                 onChange={optionSelected}
                 disabled={false}
+                style={{border: "1px solid black"}}
             />
         </div>
     )

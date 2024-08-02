@@ -12,13 +12,14 @@ function TabularView({recordList, objectName, recordSelected}){
         return;
     }
 
+    const nonRenderableFields = ["id", "parentId"];
     const fields = parseFields(recordList[0]);
 
     function parseFields(demoRecord){
         const result = [];
 
         for(let field in demoRecord){
-            if(field.toLowerCase() === "id"){
+            if(nonRenderableFields.includes(field)){
                 continue;
             }
             result.push(field);

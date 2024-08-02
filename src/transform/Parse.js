@@ -12,7 +12,23 @@ class Parse {
             return val.slice(0, 10);
         }
 
+        if(fieldName === "created" || fieldName === "modified"){
+            return `${val.slice(0,10)}  ${val.slice(11,16)}`
+        }
+
         return val;
+    }
+
+    static handleObjectValue(val, fieldName, entityName){
+        if(!val){
+            return "";
+        }
+        
+        if(entityName === "Account" && fieldName === "parent"){
+            return [val["id"], val["companyName"]];
+        }
+
+        return ["invalid relationship object handling", ""];
     }
 
     static firstLetterCapital(inputStr){

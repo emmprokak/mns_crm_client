@@ -17,7 +17,7 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
     const [chosenActionType, setChosenActionType] = useState("");
 
 
-    const nonRenderableFields = ["id"];
+    const nonRenderableFields = ["id", "parentId"];
 
     useEffect(() => {
         const loadData = async () => {
@@ -27,7 +27,7 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
         };
 
         loadData();
-    }, []);
+    }, [entryId]);
 
     useEffect(() => {
         seperateFieldsIntoTwoGroups();
@@ -76,6 +76,10 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
         setModalKey(modalKey + 1);
     }
 
+    function relatedRecordSelected(relatedEntryId){
+        bubbleUpEntryIdChange(relatedEntryId);
+    }
+
     return(
         <div>
             {
@@ -99,7 +103,7 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
                     <div className="left-div">
                         {
                             firstColFields.map(field => (
-                                <EntityPageField key={field} fieldName={field} fieldValue={entry[field]} />
+                                <EntityPageField key={field} fieldName={field} fieldValue={entry[field]} entityName={objectName} relatedEntrySelected={relatedRecordSelected}/>
                             ))
                         }
                     </div>
@@ -107,7 +111,7 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
                     <div className="right-div">
                         {
                             secondColFields.map(field => (
-                                <EntityPageField key={field} fieldName={field} fieldValue={entry[field]} />
+                                <EntityPageField key={field} fieldName={field} fieldValue={entry[field]} entityName={objectName} relatedEntrySelected={relatedRecordSelected}/>
                             ))
                         }
                     </div>

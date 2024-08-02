@@ -34,7 +34,9 @@ class LabelMapper {
         "contactRole" : "Contact Role",
         "contactEmail" : "Contact Email",
         "status" : "Status",
-        "id" : "Id"
+        "id" : "Id",
+        "created": "Created On",
+        "modified": "Last Updated On"
     }
 }
 

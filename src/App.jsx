@@ -24,6 +24,11 @@ function App() {
     ];
   }
 
+  
+  // useEffect(() => {
+
+  // }, [currentObjectId]);
+
   function handleItemClick(event){
     setActiveItem(event.target.text);
     retrieveRecords(event.target.text);
@@ -49,7 +54,6 @@ function App() {
       setSingleRecordView(false);
       return;
     }
-
     setCurrentObjectId(newEntryId);
   }
   

@@ -5,6 +5,7 @@ import RequestService from "../../service/RequestService";
 import { Logger } from "../../service/Logger";
 import Checkbox from "../data-type components/Checkbox";
 import TextInput from "../data-type components/TextInput";
+import EntryPointer from "../data-type components/EntryPointer";
 
 function CreateAccountModal({entry, bubbleUpFinalEntry, actionType}){
     const [industryOptions, setIndustryOptions] = useState([]);
@@ -57,6 +58,9 @@ function CreateAccountModal({entry, bubbleUpFinalEntry, actionType}){
     function updateAccount(updateEvent){
         let dataObject = JSON.parse(JSON.stringify(accDetails));
         dataObject[updateEvent.source] = updateEvent.value;
+        // necessary to clear parent field
+        dataObject["parent"] = null;
+        Logger.log(dataObject);
         setAccDetails(dataObject);
         bubbleUpFinalEntry(dataObject);
     }
@@ -133,9 +137,9 @@ function CreateAccountModal({entry, bubbleUpFinalEntry, actionType}){
 
                     <Grid.Column>
                         <div>
-                            <label htmlFor="" style={{display: "block", paddingLeft: "5px"}}>Website</label>
-                            <TextInput placeholder='Website' bubbleUpUpdate={updateAccount} dataId="website"
-                                value={accDetails.website}/>
+                            <label htmlFor="" style={{display: "block", paddingLeft: "5px"}}>Parent Account</label>
+                            <EntryPointer entryId={accDetails.id} entityName="account" bubbleUpUpdate={updateAccount}
+                             actionName={UPDATE_ACCOUNT_ACTION} dataId="parentId" value={accDetails.parentId}/>
                         </div>
                     </Grid.Column>
                 </Grid.Row>
@@ -156,7 +160,20 @@ function CreateAccountModal({entry, bubbleUpFinalEntry, actionType}){
                             <TextInput placeholder='VAT' bubbleUpUpdate={updateAccount} dataId="vat" value={accDetails.vat}/>
                         </div>
                     </Grid.Column>
+
                 </Grid.Row>
+
+                <Grid.Row>
+                    <Grid.Column>
+                        <div>
+                            <label htmlFor="" style={{display: "block", paddingLeft: "5px"}}>Website</label>
+                            <TextInput placeholder='Website' bubbleUpUpdate={updateAccount} dataId="website"
+                                value={accDetails.website}/>
+                        </div>
+                    </Grid.Column>
+                </Grid.Row>
+
+                
 
             </Grid>
         </div>

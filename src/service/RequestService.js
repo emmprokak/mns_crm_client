@@ -52,6 +52,12 @@ class RequestService{
         return response.data;
     }
 
+    static async getLastModifiedRecords(objectName, limitNumber, orderByField, orderType){
+        const request = RequestConstructor.getEntityRecordsRequestLimit(this.IP_ADDRESS, this.PORT, this.PROTOCOL, objectName, limitNumber, orderByField, orderType);
+        const response = await RequestUtil.makeHttpRequest(request);
+        return response.data;
+    }
+
     static async sendCreateEntry(objectName, entry){
         const request = RequestConstructor.getEntityCreateRequest(this.IP_ADDRESS, this.PORT, this.PROTOCOL, objectName);
         Logger.log(`create req = ${request}`)

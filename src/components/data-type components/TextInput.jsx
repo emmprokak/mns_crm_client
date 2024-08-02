@@ -8,7 +8,7 @@ function TextInput({placeholder, dataId, bubbleUpUpdate, actionName, value}){
     }
     return (
         <div>
-            <Input placeholder={placeholder} style={{border: "1px solid black", borderRadius: "5px"}}
+            <Input placeholder={placeholder} style={{border: "1px solid black", borderRadius: "5px", width: "100%"}}
               onChange={handleUpdate} value={value}/>
         </div>
     )

@@ -99,23 +99,33 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
                 <div>
                     <EntityHeader objectName={objectName} record={entry} fieldCollection={fieldTotal} entryActionClicked={actionClicked}/>
                 </div>
-                <div className="field-group-container">
-                    <div className="left-div">
-                        {
-                            firstColFields.map(field => (
-                                <EntityPageField key={field} fieldName={field} fieldValue={entry[field]} entityName={objectName} relatedEntrySelected={relatedRecordSelected}/>
-                            ))
-                        }
+
+                <div className="main-record-data-container">
+                    <div className="field-group-container">
+                        <div className="left-div">
+                            {
+                                firstColFields.map(field => (
+                                    <EntityPageField key={field} fieldName={field} fieldValue={entry[field]} entityName={objectName} relatedEntrySelected={relatedRecordSelected}/>
+                                ))
+                            }
+                        </div>
+
+                        <div className="right-div">
+                            {
+                                secondColFields.map(field => (
+                                    <EntityPageField key={field} fieldName={field} fieldValue={entry[field]} entityName={objectName} relatedEntrySelected={relatedRecordSelected}/>
+                                ))
+                            }
+                        </div>
                     </div>
 
-                    <div className="right-div">
-                        {
-                            secondColFields.map(field => (
-                                <EntityPageField key={field} fieldName={field} fieldValue={entry[field]} entityName={objectName} relatedEntrySelected={relatedRecordSelected}/>
-                            ))
-                        }
+                    <div className="related-records-area">
+
                     </div>
                 </div>
+
+
+                
             </div>
         </div>
            

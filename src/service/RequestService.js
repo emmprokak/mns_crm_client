@@ -31,6 +31,17 @@ class RequestService{
         ]
     }
 
+    static async getLeadStatusOptions(){
+        return [
+            {text: "Discovery", value: "Discovery"},
+            {text: "Sent Email", value: "Send Email"},
+            {text: "Received Email", value: "Received Email"},
+            {text: "Confirmation", value: "Confirmation"},
+            {text: "Success", value: "Success"},
+            {text: "Failure", value: "Failure"}
+        ]
+    }
+
     static async getRoleOptions(){
         return [
             {text: "PM", value: "PM"},

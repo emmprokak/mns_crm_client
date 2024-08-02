@@ -48,7 +48,7 @@ function EntryPointer({entryId, entryFieldToDisplay, entityName, dataId, bubbleU
     }, [entryId]);
 
     function parseOptions(records){
-        const comboboxOptions = [];
+        const comboboxOptions = [{key: "None", value: null, text: "None"}]; // default value
         for(let record of records){
             if(record.id !== entryId){
                 comboboxOptions.push({key: record.id, value: record.id, text: record.companyName})
@@ -59,7 +59,7 @@ function EntryPointer({entryId, entryFieldToDisplay, entityName, dataId, bubbleU
     }
 
     function appendOption(singleRecord){
-        //TODO: dynamic label field
+        //TODO: dynamic label field for lookup to non account entry
         const comboboxOptions = [...optionRecords, {key: singleRecord.id, value: singleRecord.id, text: singleRecord.companyName}];
         setOptionRecords(comboboxOptions);
     }

@@ -12,7 +12,7 @@ function TabularView({recordList, objectName, recordSelected}){
         return;
     }
 
-    const nonRenderableFields = ["id", "parentId"];
+    const nonRenderableFields = ["id", "account", "parentId"];
     const fields = parseFields(recordList[0]);
 
     function parseFields(demoRecord){
@@ -63,7 +63,7 @@ function TabularView({recordList, objectName, recordSelected}){
                                 key={"rec" + row["id"] + col}
                             >                                
 
-                                <TabularCell recordObject={row} fieldName={col} cellClicked={fieldClicked}/>
+                                <TabularCell recordObject={row} fieldName={col} cellClicked={fieldClicked} entityName={objectName}/>
                                     
                             </Table.Cell>
                             ))

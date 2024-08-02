@@ -1,3 +1,4 @@
+import EventGenerator from '../events/EventGenerator';
 import LabelMapper from '../labels/LabelMapper';
 import { Logger } from '../service/Logger';
 import Parse from '../transform/Parse';
@@ -5,17 +6,37 @@ import './css/EntityPage.css';
 
 function EntityPageField({fieldName, fieldValue, entityName, relatedEntrySelected}){
 
+    function getRelatedObjectType(entry){
+        if(!entry){
+            return;
+        }
+
+
+        if("clientRating" in entry){
+            return "Account";
+        }
+
+        if("companyIndustry" in entry){
+            return "Lead";
+        }
+
+        if("role" in entry){
+            return "Contact";
+        }
+    }
+
     function renderFieldValue(){
         if(typeof fieldValue === 'object'){
             const [id, displayValue] = Parse.handleObjectValue(fieldValue, fieldName, entityName)
-            return <a onClick={entryObjectSelected} data-id={id} style={{cursor : "pointer"}}>{displayValue}</a>;
+            const relatedObjectType = getRelatedObjectType(fieldValue);
+            return <a onClick={entryObjectSelected} data-id={id} data-object={relatedObjectType} style={{cursor : "pointer"}}>{displayValue}</a>;
         }
 
         return Parse.parseTableValue(fieldValue, fieldName);
     }
 
     function entryObjectSelected(event){
-        relatedEntrySelected(event.target.dataset.id);
+        relatedEntrySelected(EventGenerator.getRelatedLinkEvent(event.target.dataset.id, event.target.dataset.object))
     }
 
     return(

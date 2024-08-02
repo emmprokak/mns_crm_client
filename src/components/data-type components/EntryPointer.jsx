@@ -59,6 +59,7 @@ function EntryPointer({entryId, entryFieldToDisplay, entityName, dataId, bubbleU
     }
 
     function appendOption(singleRecord){
+        //TODO: dynamic label field
         const comboboxOptions = [...optionRecords, {key: singleRecord.id, value: singleRecord.id, text: singleRecord.companyName}];
         setOptionRecords(comboboxOptions);
     }

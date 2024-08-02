@@ -48,13 +48,21 @@ function App() {
     setCurrentObjectName(objectName);
   }
 
-  async function displayedRecordChanged(newEntryId){
-    if(!newEntryId){
-      await retrieveRecords(currentObjectName);
-      setSingleRecordView(false);
+  async function displayedRecordChanged(event){
+    if(typeof event === "string"){
+      const newEntryId = event;
+
+      if(!newEntryId){
+        await retrieveRecords(currentObjectName);
+        setSingleRecordView(false);
+        return;
+      }
+      setCurrentObjectId(newEntryId);
       return;
     }
-    setCurrentObjectId(newEntryId);
+
+    recordClicked(null, event.entityName, event.entryId);
+    
   }
   
   return (

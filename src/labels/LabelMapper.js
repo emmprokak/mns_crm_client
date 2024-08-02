@@ -2,7 +2,7 @@ class LabelMapper {
 
     // TODO: retrieve dynamically from config entities
     static fieldNameToLabelMap = {
-        "parentId" : "Parent Account",
+        "Parent" : "Parent Account",
         "companyName" : "Company Name",
         "leadId" : "Source Lead",
         "industry" : "Industry",

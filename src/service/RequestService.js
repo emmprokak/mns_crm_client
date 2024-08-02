@@ -22,6 +22,29 @@ class RequestService{
             {text: "company", value: "company"},
         ]
     }
+
+    static async getPrefixOptions(){
+        return [
+            {text: "Mr", value: "Mr"},
+            {text: "Ms", value: "Ms"},
+            {text: "Mrs", value: "Mrs"},
+        ]
+    }
+
+    static async getRoleOptions(){
+        return [
+            {text: "PM", value: "PM"},
+            {text: "Developer", value: "Developer"},
+            {text: "Analyst", value: "Analyst"},
+            {text: "Consultant", value: "Consultant"},
+            {text: "Architect", value: "Architect"},
+            {text: "Manager", value: "Manager"},
+            {text: "Employee", value: "Employee"},
+            {text: "Representative", value: "Representative"},
+            {text: "CEO", value: "CEO"},
+            {text: "CIO", value: "CIO"},
+        ]
+    }
     
     static async getAllAccounts(){
        return await this.getAllRecords("account")

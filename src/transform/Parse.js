@@ -1,7 +1,17 @@
+import { Logger } from "../service/Logger";
+
 class Parse {
     static parseTableValue(val, fieldName, objectName){
         if(!val){
             return "-";
+        }
+
+        if(typeof val === "object"){
+            if((objectName === "Contact" || objectName === "Account") && fieldName === "parent"){
+                return val["companyName"];
+            }
+
+            return "object";
         }
 
         if(fieldName === "active"){
@@ -23,10 +33,11 @@ class Parse {
         if(!val){
             return "";
         }
-        
-        if(entityName === "Account" && fieldName === "parent"){
+
+        if((entityName === "Account" || entityName === "Contact") && fieldName === "parent"){
             return [val["id"], val["companyName"]];
         }
+
 
         return ["invalid relationship object handling", ""];
     }

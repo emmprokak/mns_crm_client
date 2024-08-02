@@ -17,7 +17,7 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
     const [chosenActionType, setChosenActionType] = useState("");
 
 
-    const nonRenderableFields = ["id", "parentId"];
+    const nonRenderableFields = ["id", "parentId", "account"];
 
     useEffect(() => {
         const loadData = async () => {
@@ -76,8 +76,8 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
         setModalKey(modalKey + 1);
     }
 
-    function relatedRecordSelected(relatedEntryId){
-        bubbleUpEntryIdChange(relatedEntryId);
+    function relatedRecordSelected(relatedEntrySelectedEvent){
+        bubbleUpEntryIdChange(relatedEntrySelectedEvent);
     }
 
     return(

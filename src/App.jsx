@@ -49,6 +49,12 @@ function App() {
   }
 
   async function displayedRecordChanged(event){
+    if(!event){
+        await retrieveRecords(currentObjectName);
+        setSingleRecordView(false);
+        return;
+    }
+
     if(typeof event === "string"){
       const newEntryId = event;
 

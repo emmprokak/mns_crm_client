@@ -28,12 +28,12 @@ function CreateUpdateContactModal({entry, bubbleUpFinalEntry, actionType}){
         };
 
         const fillInValues = () => {
-            const accValues = {};
+            const conValues = {};
             for(let field in entry){
-                accValues[field] = entry[field];
+                conValues[field] = entry[field];
             }
-
-            setContactDetails(accValues);
+            Logger.log(conValues)
+            setContactDetails(conValues);
         };
 
         retrieveConfig();
@@ -49,6 +49,7 @@ function CreateUpdateContactModal({entry, bubbleUpFinalEntry, actionType}){
         dataObject[updateEvent.source] = updateEvent.value;
 
         dataObject["account"] = null;
+        dataObject["parent"] = null;
 
         Logger.log(dataObject);
         setContactDetails(dataObject);

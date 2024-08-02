@@ -31,7 +31,7 @@ function EntryPointer({entryId, entryFieldToDisplay, entityName, dataId, bubbleU
         };
 
         const fetchParentRecord = async () => {
-            const parentRecord = await RequestService.getSingleRecord(entityName, entryId);
+            const parentRecord = await RequestService.getSingleRecord(entityName, value);
             appendOption(parentRecord);
             setLoading(false);
         }

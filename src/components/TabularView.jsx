@@ -12,7 +12,7 @@ function TabularView({recordList, objectName, recordSelected}){
         return;
     }
 
-    const nonRenderableFields = ["id", "account", "parentId"];
+    const nonRenderableFields = ["id", "account", "parentId", "accountId"];
     const fields = parseFields(recordList[0]);
 
     function parseFields(demoRecord){

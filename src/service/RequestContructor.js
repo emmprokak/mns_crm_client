@@ -7,6 +7,10 @@ class RequestConstructor{
         return `${protocol}://${ipAddress}:${port}/api/${entityName}/${recordId}`;
     }
 
+    static getEntitySingleRecordCompleteRequest(ipAddress, port, protocol, entityName, recordId){
+        return `${protocol}://${ipAddress}:${port}/api/${entityName}/${recordId}/complete`;
+    }
+
     static getEntityCreateRequest(ipAddress, port, protocol, entityName){
         return `${protocol}://${ipAddress}:${port}/api/${entityName}/new`;
     }

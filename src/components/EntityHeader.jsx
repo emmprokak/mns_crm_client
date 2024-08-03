@@ -1,4 +1,5 @@
 import { Logger } from "../service/Logger";
+import Parse from "../transform/Parse";
 import "./css/EntityPage.css";
 import EntityAction from "./EntityAction";
 
@@ -16,7 +17,7 @@ function EntityHeader({objectName, record, fieldCollection, entryActionClicked})
         <div className="header-top-container">
             <div className="entity-header">
                 <div className="entity-header-object">
-                    {objectName} <span style={{fontSize: "0.7em"}}>({record["id"]})</span> 
+                    {Parse.firstLetterCapital(objectName)} <span style={{fontSize: "0.7em"}}>({record["id"]})</span> 
                 </div>
 
                 <div className="entity-header-preview-fields">

@@ -86,6 +86,13 @@ class RequestService{
         return response.data;
     }
 
+    static async getSingleRecordComplete(objectName, recordId){
+        const request = RequestConstructor.getEntitySingleRecordCompleteRequest(this.IP_ADDRESS, this.PORT, this.PROTOCOL, objectName.toLowerCase(), recordId);
+    
+        const response = await RequestUtil.makeHttpRequest(request);
+        return response.data;
+    }
+
     static async getLastModifiedRecords(objectName, limitNumber, orderByField, orderType){
         const request = RequestConstructor.getEntityRecordsRequestLimit(this.IP_ADDRESS, this.PORT, this.PROTOCOL, objectName, limitNumber, orderByField, orderType);
         const response = await RequestUtil.makeHttpRequest(request);

@@ -4,6 +4,7 @@ import EntityPageField from "./EntityPageField";
 import EntityHeader from "./EntityHeader";
 import { Logger } from "../service/Logger";
 import ModalController from "./ModalController";
+import RelatedEntriesGroup from "./related-entries/RelatedEntriesGroup";
 
 
 function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
@@ -15,13 +16,15 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
     const [showModal, setShowModal] = useState(false);
     const [modalKey, setModalKey] = useState(0);
     const [chosenActionType, setChosenActionType] = useState("");
+    const [relationshipFields, setRelationshipFields] = useState([]);
+
 
 
     const nonRenderableFields = ["id", "parentId", "account", "accountId"];
 
     useEffect(() => {
         const loadData = async () => {
-            const result = await RequestService.getSingleRecord(objectName, entryId);
+            const result = await RequestService.getSingleRecordComplete(objectName, entryId);
             console.log(entry)
             setEntry(result);
         };
@@ -43,9 +46,17 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
         const rightList = [];
         const total = [];
 
+        const relFields = [];
+
         for(let field of Object.keys(entry)){
             if(nonRenderableFields.includes(field)){
                 continue;
+            }
+
+            //related entry arrays
+            if(Array.isArray(entry[field])){
+                relFields.push(field);
+                continue;   
             }
 
             if(idx % 2 === 0){
@@ -61,6 +72,8 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
         setFirstColFields(leftList)
         setSecondColFields(rightList);
         setFieldTotal(total);
+        setRelationshipFields(relFields);
+        Logger.log(relFields);
     }
 
     function actionClicked(objectName, entry, actionType){
@@ -120,7 +133,13 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
                     </div>
 
                     <div className="related-records-area">
-
+                            {
+                                relationshipFields.map(field => (
+                                    // pointerToParentName, relatedEntriesDisplayField
+                                    <RelatedEntriesGroup key={"rel" + field} entityName={objectName} relationshipName={field} entryId={entryId} relatedEntriesList={entry[field]}
+                                        relatedEntrySelected={relatedRecordSelected} />
+                                ))
+                            }
                     </div>
                 </div>
 

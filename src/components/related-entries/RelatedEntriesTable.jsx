@@ -8,7 +8,7 @@ import EventGenerator from "../../events/EventGenerator";
 function RelatedEntriesTable({entityName, recordList, originEntityName, relatedRecordClicked, relationshipName}){
     const [fields, setFields] = useState([]);
 
-    const relatedDisplayableFields = ["companyName", "firstName", "lastName"];
+    const relatedDisplayableFields = ["companyName", "firstName", "lastName", "title", "status", "name"];
 
     useEffect(() => {
         prepareFields();
@@ -32,7 +32,15 @@ function RelatedEntriesTable({entityName, recordList, originEntityName, relatedR
     }
 
     function relatedRecordSelected(event){
-        relatedRecordClicked(EventGenerator.getRelatedLinkEvent(event.target.id.split(":")[1], relationshipName.slice(0, -1)));
+        relatedRecordClicked(EventGenerator.getRelatedLinkEvent(event.target.id.split(":")[1], parseRelationshipEntryEntityName(relationshipName)));
+    }
+
+    function parseRelationshipEntryEntityName(name){
+        if(name.toLowerCase() === "opportunities"){
+            return "Opportunity";
+        }
+
+        return relationshipName.slice(0, -1);
     }
 
     return(

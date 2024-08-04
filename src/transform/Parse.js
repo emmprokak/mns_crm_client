@@ -11,6 +11,18 @@ class Parse {
                 return val["companyName"];
             }
 
+            if(objectName === "Opportunity" && fieldName === "relatedAccount"){
+                return val["companyName"];
+            }
+
+            if(objectName === "Task" && fieldName === "relatedLead"){
+                return val["companyName"];
+            }
+
+            if(objectName === "Task" && fieldName === "relatedOpportunity"){
+                return val["title"];
+            }
+
             return "object";
         }
 
@@ -36,6 +48,18 @@ class Parse {
 
         if((entityName === "Account" || entityName === "Contact") && fieldName === "parent"){
             return [val["id"], val["companyName"]];
+        }
+
+        if(entityName === "Opportunity" && fieldName === "relatedAccount"){
+            return [val["id"], val["companyName"]];
+        }
+
+        if(entityName === "Task" && fieldName === "relatedLead"){
+            return [val["id"], val["companyName"]];
+        }
+
+        if(entityName === "Task" && fieldName === "relatedOpportunity"){
+            return [val["id"], val["title"]];
         }
 
 

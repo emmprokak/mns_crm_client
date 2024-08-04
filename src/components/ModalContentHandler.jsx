@@ -5,11 +5,15 @@ import { Logger } from "../service/Logger";
 import DeleteModal from "./DeleteModal";
 import CreateUpdateContactModal from "./entry-specific/CreateUpdateContactModal";
 import CreateUpdateLeadModal from "./entry-specific/CreateUpdateLeadModal";
+import CreateUpdateOpportunityModal from "./entry-specific/CreateUpdateOpportunityModal";
+import CreateUpdateTaskModal from "./entry-specific/CreateUpdateTaskModal";
 
 function ModalContentHandler({entry, actionType, entryName, bubbleUpFinalEntry}){
     const [createOrUpdateAccount, setCreateOrUpdateAccount] = useState(false);
     const [createOrUpdateContact, setCreateOrUpdateContact] = useState(false);
     const [createOrUpdateLead, setCreateOrUpdateLead] = useState(false);
+    const [createOrUpdateOpportunity, setCreateOrUpdateOpportunity] = useState(false);
+    const [createOrUpdateTask, setCreateOrUpdateTask] = useState(false);
     const [genericDelete, setGenericDelete] = useState(false);
 
     useEffect(() => {
@@ -30,6 +34,16 @@ function ModalContentHandler({entry, actionType, entryName, bubbleUpFinalEntry})
 
         if((actionType === "create" || actionType === "update") && entryName === "Lead"){
             setCreateOrUpdateLead(true);
+            return;
+        }
+
+        if((actionType === "create" || actionType === "update") && entryName === "Opportunity"){
+            setCreateOrUpdateOpportunity(true);
+            return;
+        }
+
+        if((actionType === "create" || actionType === "update") && entryName === "Task"){
+            setCreateOrUpdateTask(true);
             return;
         }
 
@@ -62,6 +76,20 @@ function ModalContentHandler({entry, actionType, entryName, bubbleUpFinalEntry})
             {       
                 createOrUpdateLead ? 
                 <CreateUpdateLeadModal entry={entry} bubbleUpFinalEntry={bubbleUpFinalEntry} actionType={actionType}/>
+                :
+                <div></div>
+            }
+
+            {       
+                createOrUpdateOpportunity ? 
+                <CreateUpdateOpportunityModal entry={entry} bubbleUpFinalEntry={bubbleUpFinalEntry} actionType={actionType}/>
+                :
+                <div></div>
+            }
+
+            {       
+                createOrUpdateTask ? 
+                <CreateUpdateTaskModal entry={entry} bubbleUpFinalEntry={bubbleUpFinalEntry} actionType={actionType}/>
                 :
                 <div></div>
             }

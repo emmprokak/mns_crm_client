@@ -20,7 +20,9 @@ function App() {
       {key: '0', name : 'Overview', content : 'Overview'},
       {key: '1', name : 'Account', content : 'Account'},
       {key: '2', name : 'Contact', content : 'Contact'},
-      {key: '3', name : 'Lead', content : 'Lead'}
+      {key: '3', name : 'Lead', content : 'Lead'},
+      {key: '4', name : 'Opportunity', content : 'Opportunity'},
+      {key: '5', name : 'Task', content : 'Task'}
     ];
   }
 

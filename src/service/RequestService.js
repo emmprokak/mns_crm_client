@@ -56,6 +56,44 @@ class RequestService{
             {text: "CIO", value: "CIO"},
         ]
     }
+
+    static async getOpptyStatusOptions(){
+        return [
+            {text: "new", value: "new"},
+            {text: "discovery", value: "discovery"},
+            {text: "quote", value: "quote"},
+            {text: "approval", value: "approval"},
+            {text: "success", value: "success"},
+            {text: "failure", value: "failure"},
+        ]
+    }
+
+    static async getOpptyTypeOptions(){
+        return [
+            {text: "sell", value: "sell"},
+            {text: "upsell", value: "upsell"},
+            {text: "winback", value: "winback"}
+        ]
+    }
+
+    static async getTaskStatusOptions(){
+        return [
+            {text: "Discovery", value: "Discovery"},
+            {text: "Sent Email", value: "Send Email"},
+            {text: "Received Email", value: "Received Email"},
+            {text: "Confirmation", value: "Confirmation"},
+            {text: "Success", value: "Success"},
+            {text: "Failure", value: "Failure"}
+        ]
+    }
+
+    static async getTaskTypeOptions(){
+        return [
+            {text: "Action", value: "Action"},
+            {text: "Informative", value: "Informative"},
+           
+        ]
+    }
     
     static async getAllAccounts(){
        return await this.getAllRecords("account")

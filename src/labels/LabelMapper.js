@@ -36,7 +36,17 @@ class LabelMapper {
         "status" : "Status",
         "id" : "Id",
         "created": "Created On",
-        "modified": "Last Updated On"
+        "modified": "Last Updated On",
+        "title": "Opportunity Title",
+        "comments": "Comments",
+        "expectedRevenue" : "Expected Revenue",
+        "relatedAccount" : "Related Account",
+        "relatedLead" : "Related Lead",
+        "relatedOpportunity" : "Related Opportunity",
+        "dueDate" : "Due Date",
+        "reason" : "Reason",
+        "name" : "Name"
+
     }
 }
 

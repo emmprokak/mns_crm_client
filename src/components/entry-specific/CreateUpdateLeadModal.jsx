@@ -12,7 +12,7 @@ function CreateUpdateLeadModal({entry, bubbleUpFinalEntry, actionType}){
     const [roleOptions, setRoleOptions] = useState([]);
     const [industryOptions, setIndustryOptions] = useState([]);
     const [statusOptions, setStatusOptions] = useState([]);
-    const [leadDetails, setContactDetails] = useState({});
+    const [leadDetails, setLeadDetails] = useState({});
 
     const UPDATE_LEAD_ACTION = "updateLead";
 
@@ -46,7 +46,7 @@ function CreateUpdateLeadModal({entry, bubbleUpFinalEntry, actionType}){
                 conValues[field] = entry[field];
             }
             Logger.log(conValues)
-            setContactDetails(conValues);
+            setLeadDetails(conValues);
         };
 
         retrieveConfig();
@@ -63,7 +63,7 @@ function CreateUpdateLeadModal({entry, bubbleUpFinalEntry, actionType}){
 
 
         Logger.log(dataObject);
-        setContactDetails(dataObject);
+        setLeadDetails(dataObject);
         bubbleUpFinalEntry(dataObject);
     }
 

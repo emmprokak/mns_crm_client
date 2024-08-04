@@ -5,8 +5,6 @@ import RelatedEntriesTable from "./RelatedEntriesTable";
 function RelatedEntriesGroup({entityName, relationshipName, entryId, relatedEntriesList, pointerToParentName, relatedEntriesDisplayField, relatedEntrySelected}){
 
     useEffect(() => {
-        Logger.log("from reltaedEntresi grouips");
-        Logger.log(relatedEntriesList);
     }, [entryId])
 
     return (

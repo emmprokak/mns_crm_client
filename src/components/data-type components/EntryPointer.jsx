@@ -51,7 +51,7 @@ function EntryPointer({entryId, entryFieldToDisplay, entityName, dataId, bubbleU
         const comboboxOptions = [{key: "None", value: null, text: "None"}]; // default value
         for(let record of records){
             if(record.id !== entryId){
-                comboboxOptions.push({key: record.id, value: record.id, text: record.companyName})
+                comboboxOptions.push({key: record.id, value: record.id, text: record[getComboboxOptionDisplayFieldName()]})
             }
         }
 
@@ -59,9 +59,16 @@ function EntryPointer({entryId, entryFieldToDisplay, entityName, dataId, bubbleU
     }
 
     function appendOption(singleRecord){
-        //TODO: dynamic label field for lookup to non account entry
-        const comboboxOptions = [...optionRecords, {key: singleRecord.id, value: singleRecord.id, text: singleRecord.companyName}];
+        const comboboxOptions = [...optionRecords, {key: singleRecord.id, value: singleRecord.id, text: singleRecord[getComboboxOptionDisplayFieldName()]}];
         setOptionRecords(comboboxOptions);
+    }
+
+    function getComboboxOptionDisplayFieldName(){
+        if(entityName === "opportunity"){
+            return "title";
+        }
+
+        return "companyName";
     }
 
     function sendUpdate(event, {name, value}){

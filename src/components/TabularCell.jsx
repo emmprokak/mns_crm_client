@@ -4,7 +4,7 @@ import Parse from "../transform/Parse";
 function TabularCell({recordObject, fieldName, cellClicked, entityName}){
 
     //TODO: fix lookups
-    const linkableFields = ["companyName", "firstName", "lastName"];
+    const linkableFields = ["companyName", "firstName", "lastName", "title", "name"];
 
     function renderFieldValue(){
         if(linkableFields.includes(fieldName)){

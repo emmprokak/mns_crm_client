@@ -20,7 +20,7 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
 
 
 
-    const nonRenderableFields = ["id", "parentId", "account", "accountId"];
+    const nonRenderableFields = ["id", "parentId", "account", "accountId", "relatedAccountId", "relatedLeadId", "relatedOpportunityId"];
 
     useEffect(() => {
         const loadData = async () => {
@@ -55,6 +55,9 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
 
             //related entry arrays
             if(Array.isArray(entry[field])){
+                Logger.log("added to rel fields");
+
+                Logger.log(field);
                 relFields.push(field);
                 continue;   
             }

@@ -8,7 +8,7 @@ import EventGenerator from "../../events/EventGenerator";
 function RelatedEntriesTable({entityName, recordList, originEntityName, relatedRecordClicked, relationshipName}){
     const [fields, setFields] = useState([]);
 
-    const relatedDisplayableFields = ["companyName", "firstName", "lastName", "title", "status", "name"];
+    const relatedDisplayableFields = ["companyName", "firstName", "lastName", "title", "status", "name", "customerPhone"];
 
     useEffect(() => {
         prepareFields();

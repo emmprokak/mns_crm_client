@@ -72,6 +72,10 @@ function EntryPointer({entryId, entryFieldToDisplay, entityName, dataId, bubbleU
             return entry["firstName"] + " " + entry["lastName"];
         }
 
+        if(entityName === "case"){
+            return entry["title"];
+        }
+
         return entry["companyName"];
     }
 

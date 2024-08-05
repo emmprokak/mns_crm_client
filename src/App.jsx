@@ -24,7 +24,8 @@ function App() {
       {key: '3', name : 'Lead', content : 'Lead'},
       {key: '4', name : 'Opportunity', content : 'Opportunity'},
       {key: '5', name : 'Task', content : 'Task'},
-      {key: '6', name : 'Case', content : 'Case'}
+      {key: '6', name : 'Case', content : 'Case'},
+      {key: '7', name : 'Call', content : 'Voice Call'}
     ];
   }
 

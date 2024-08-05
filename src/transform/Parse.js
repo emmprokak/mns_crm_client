@@ -31,6 +31,14 @@ class Parse {
                 return val["title"];
             }
 
+            if(objectName === "Call" && fieldName === "relatedAccount"){
+                return val["companyName"];
+            }
+
+            if(objectName === "Call" && fieldName === "relatedCase"){
+                return val["title"];
+            }
+
             return "object";
         }
 
@@ -38,7 +46,7 @@ class Parse {
             return val ? "yes" : "no";
         }
 
-        if(fieldName === "birthdate" || fieldName === "dueDate" || fieldName === "createdDate" || fieldName === "closedDate"){
+        if(fieldName === "birthdate" || fieldName === "dueDate" || fieldName === "createdDate" || fieldName === "closedDate" || fieldName === "callDate"){
             return val.slice(0, 10);
         }
 
@@ -76,6 +84,15 @@ class Parse {
 
         if(entityName === "Case" && fieldName === "relatedContact"){
             return [val["id"], val["firstName"] + " " + val["lastName"]];
+        }
+
+        if(entityName === "Call" && fieldName === "relatedAccount"){
+            return [val["id"], val["companyName"]];
+        }
+
+        if(entityName === "Call" && fieldName === "relatedCase"){
+            return [val["id"], val["title"]];
+
         }
 
 

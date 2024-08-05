@@ -16,7 +16,7 @@ function TabularView({recordList, objectName, recordSelected}){
         return;
     }
 
-    const nonRenderableFields = ["id", "account", "parentId", "accountId", "relatedAccountId", "relatedLeadId", "relatedOpportunityId", "relatedContactId"];
+    const nonRenderableFields = ["id", "account", "parentId", "accountId", "relatedAccountId", "relatedLeadId", "relatedOpportunityId", "relatedContactId", "relatedCaseId"];
     const fields = parseFields(recordList[0]);
 
     function parseFields(demoRecord){

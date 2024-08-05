@@ -19,7 +19,7 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
     const [chosenActionType, setChosenActionType] = useState("");
     const [relationshipFields, setRelationshipFields] = useState([]);
 
-    const nonRenderableFields = ["id", "parentId", "account", "accountId", "relatedAccountId", "relatedLeadId", "relatedOpportunityId", "relatedContactId"];
+    const nonRenderableFields = ["id", "parentId", "account", "accountId", "relatedAccountId", "relatedLeadId", "relatedOpportunityId", "relatedContactId", "relatedCaseId"];
 
     useEffect(() => {
         const loadData = async () => {

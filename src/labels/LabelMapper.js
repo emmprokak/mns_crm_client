@@ -37,7 +37,7 @@ class LabelMapper {
         "id" : "Id",
         "created": "Created On",
         "modified": "Last Updated On",
-        "title": "Opportunity Title",
+        "title": "Title",
         "comments": "Comments",
         "expectedRevenue" : "Expected Revenue",
         "relatedAccount" : "Related Account",
@@ -51,7 +51,12 @@ class LabelMapper {
         "category" : "Category",
         "createdDate": "Created Date",
         "relatedContact" : "Related Contact",
-        "closedDate": "Closed Date"
+        "closedDate": "Closed Date",
+        "agentName": "Agent Name",
+        "relatedCase" : "Related Case",
+        "duration" : "Duration (in seconds)",
+        "callDate" : "Call Date",
+        "customerPhone" : "Customer Phone"
 
     }
 }

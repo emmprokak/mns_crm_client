@@ -5,7 +5,7 @@ import EntityAction from "./EntityAction";
 
 function EntityHeader({objectName, record, fieldCollection, entryActionClicked}){
 
-    const viewableFields = ["companyName", "description", "website", "firstName", "lastName", "contactPerson", "status"];
+    const viewableFields = ["companyName", "description", "website", "firstName", "lastName", "contactPerson", "status", "agentName", "customerPhone"];
     const standardActions = ["Create", "Update", "Delete"];
 
     function actionClicked(actionType){

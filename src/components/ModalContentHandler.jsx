@@ -8,6 +8,7 @@ import CreateUpdateLeadModal from "./entry-specific/CreateUpdateLeadModal";
 import CreateUpdateOpportunityModal from "./entry-specific/CreateUpdateOpportunityModal";
 import CreateUpdateTaskModal from "./entry-specific/CreateUpdateTaskModal";
 import CreateUpdateCaseModal from "./entry-specific/CreateUpdateCaseModal";
+import CreateUpdateVoiceCallModal from "./entry-specific/CreateUpdateVoiceCallModal";
 
 function ModalContentHandler({entry, actionType, entryName, bubbleUpFinalEntry}){
     const [createOrUpdateAccount, setCreateOrUpdateAccount] = useState(false);
@@ -16,6 +17,7 @@ function ModalContentHandler({entry, actionType, entryName, bubbleUpFinalEntry})
     const [createOrUpdateOpportunity, setCreateOrUpdateOpportunity] = useState(false);
     const [createOrUpdateTask, setCreateOrUpdateTask] = useState(false);
     const [createOrUpdateCase, setCreateOrUpdateCase] = useState(false);
+    const [createOrUpdateVoiceCall, setCreateOrUpdateVoiceCall] = useState(false);
     const [genericDelete, setGenericDelete] = useState(false);
 
     useEffect(() => {
@@ -56,6 +58,11 @@ function ModalContentHandler({entry, actionType, entryName, bubbleUpFinalEntry})
             return;
         }
 
+        if((actionType === "create" || actionType === "update") && entryName === "Call"){
+            setCreateOrUpdateVoiceCall(true);
+            return;
+        }
+
 
         if(actionType === "delete"){
             setGenericDelete(true);
@@ -70,6 +77,7 @@ function ModalContentHandler({entry, actionType, entryName, bubbleUpFinalEntry})
         setCreateOrUpdateOpportunity(false);
         setCreateOrUpdateTask(false);
         setCreateOrUpdateCase(false);
+        setCreateOrUpdateVoiceCall(false);
         setGenericDelete(false);
     }
 
@@ -114,6 +122,13 @@ function ModalContentHandler({entry, actionType, entryName, bubbleUpFinalEntry})
             {       
                 createOrUpdateCase ? 
                 <CreateUpdateCaseModal entry={entry} bubbleUpFinalEntry={bubbleUpFinalEntry} actionType={actionType}/>
+                :
+                <div></div>
+            }
+
+            {       
+                createOrUpdateVoiceCall ? 
+                <CreateUpdateVoiceCallModal entry={entry} bubbleUpFinalEntry={bubbleUpFinalEntry} actionType={actionType}/>
                 :
                 <div></div>
             }

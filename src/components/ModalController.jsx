@@ -47,13 +47,10 @@ function ModalController({modalClosed, triggerButton, objectName, entry, actionT
       const response = await action(objectName.toLowerCase(), entryDetails);
 
       Logger.log(response);
-      // if(response.data.id){
-        // redirect to account
+
       setActionResponse(response.data);
       modalClosed(response.data);
       setOpen(false);
-
-      // }
     }
 
     async function createEntry(objName, finalEntry){
@@ -70,15 +67,6 @@ function ModalController({modalClosed, triggerButton, objectName, entry, actionT
 
     function getUpdatedEntry(entryRecord){
       setFinalEntry(entryRecord);
-    }
-
-    // TODO: evaluate if needed
-    function getStandardButtons(){
-      return (
-        <div>
-
-        </div>
-      )
     }
 
   return (

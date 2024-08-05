@@ -5,6 +5,7 @@ import EntityHeader from "./EntityHeader";
 import { Logger } from "../service/Logger";
 import ModalController from "./ModalController";
 import RelatedEntriesGroup from "./related-entries/RelatedEntriesGroup";
+import EventGenerator from "../events/EventGenerator";
 
 
 function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
@@ -30,6 +31,7 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
         };
 
         loadData();
+        Logger.log(`object name has val = ${objectName}`)
     }, [entryId]);
 
     useEffect(() => {
@@ -87,13 +89,15 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
 
     function childModalClosed(actionResponse){
         setEntry(actionResponse);
-        bubbleUpEntryIdChange(actionResponse.id);
+        bubbleUpEntryIdChange(EventGenerator.getRelatedLinkEvent(actionResponse.id, objectName));
         setShowModal(false);
         setModalKey(modalKey + 1);
     }
 
     function relatedRecordSelected(relatedEntrySelectedEvent){
+        // setModalKey(modalKey + 1)
         bubbleUpEntryIdChange(relatedEntrySelectedEvent);
+        // setModalKey(modalKey + 1); // responsible for random opening of modal bug
     }
 
     return(

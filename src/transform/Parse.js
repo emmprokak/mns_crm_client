@@ -30,7 +30,7 @@ class Parse {
             return val ? "yes" : "no";
         }
 
-        if(fieldName === "birthdate"){
+        if(fieldName === "birthdate" || fieldName === "dueDate"){
             return val.slice(0, 10);
         }
 
@@ -67,6 +67,10 @@ class Parse {
     }
 
     static firstLetterCapital(inputStr){
+        if(!inputStr){
+            return;
+        }
+        
         const firstLetter = inputStr.charAt(0)
 
         const firstLetterCap = firstLetter.toUpperCase()

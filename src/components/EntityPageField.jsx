@@ -11,7 +11,6 @@ function EntityPageField({fieldName, fieldValue, entityName, relatedEntrySelecte
             return;
         }
 
-
         if("clientRating" in entry){
             return "Account";
         }
@@ -22,6 +21,14 @@ function EntityPageField({fieldName, fieldValue, entityName, relatedEntrySelecte
 
         if("role" in entry){
             return "Contact";
+        }
+
+        if("dueDate" in entry){
+            return "Task";
+        }
+
+        if("expectedRevenue" in entry){
+            return "Opportunity";
         }
     }
 

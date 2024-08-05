@@ -21,7 +21,9 @@ function ModalContentHandler({entry, actionType, entryName, bubbleUpFinalEntry})
     }, [])
 
     function updateContentType(){
+        resetModalContentFlags();
         Logger.log(`${actionType} ^ ${entryName}`);
+        
         if((actionType === "create" || actionType === "update") && entryName === "Account"){
             setCreateOrUpdateAccount(true);
             return;
@@ -51,8 +53,14 @@ function ModalContentHandler({entry, actionType, entryName, bubbleUpFinalEntry})
             setGenericDelete(true);
             return;
         }
+    }
 
+    function resetModalContentFlags(){
         setCreateOrUpdateAccount(false);
+        setCreateOrUpdateContact(false);
+        setCreateOrUpdateLead(false);
+        setCreateOrUpdateOpportunity(false);
+        setCreateOrUpdateTask(false);
         setGenericDelete(false);
     }
 

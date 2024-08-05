@@ -6,6 +6,7 @@ import TabularView from './components/TabularView';
 import { Logger } from './service/Logger';
 import 'semantic-ui-css/semantic.min.css';
 import EntityPage from './components/EntryPage';
+import Parse from './transform/Parse';
 
 
 function App() {
@@ -25,8 +26,6 @@ function App() {
       {key: '5', name : 'Task', content : 'Task'}
     ];
   }
-
-  
   // useEffect(() => {
 
   // }, [currentObjectId]);
@@ -51,33 +50,14 @@ function App() {
   }
 
   async function displayedRecordChanged(event){
-    if(!event){
-        await retrieveRecords(currentObjectName);
-        setSingleRecordView(false);
-        return;
-    }
-
-    if(typeof event === "string"){
-      const newEntryId = event;
-
-      if(!newEntryId){
-        await retrieveRecords(currentObjectName);
-        setSingleRecordView(false);
-        return;
-      }
-      setCurrentObjectId(newEntryId);
-      return;
-    }
-
-    recordClicked(null, event.entityName, event.entryId);
-    
+    recordClicked(null, Parse.firstLetterCapital(event.entityName), event.entryId);    
   }
   
   return (
     <div>
       <Header as='h2' icon='users' content='MNS CRM'/>
 
-      <Grid columns={4} doubling>
+      <Grid columns={3} doubling>
         <GridColumn>
           <Menu>
              {

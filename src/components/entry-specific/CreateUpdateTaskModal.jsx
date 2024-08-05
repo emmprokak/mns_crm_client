@@ -38,6 +38,7 @@ function CreateUpdateTaskModal({entry, bubbleUpFinalEntry, actionType}){
         };
 
         retrieveConfig();
+        Logger.log("loaded task modal");
 
         if(actionType === "update"){
             fillInValues();

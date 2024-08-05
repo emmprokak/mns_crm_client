@@ -50,6 +50,12 @@ function App() {
   }
 
   async function displayedRecordChanged(event){
+    if(!event.entryId){
+      setCurrentObjectName(Parse.firstLetterCapital(event.entityName));
+      await retrieveRecords(event.entityName);
+      setSingleRecordView(false);
+      return;
+    }
     recordClicked(null, Parse.firstLetterCapital(event.entityName), event.entryId);    
   }
   

@@ -1,12 +1,16 @@
-import { Tab, Table, TableBody, TableCell, TableHeader, TableHeaderCell, TableRow } from "semantic-ui-react";
+import { Button, Tab, Table, TableBody, TableCell, TableHeader, TableHeaderCell, TableRow } from "semantic-ui-react";
 import { Logger } from "../service/Logger";
 import TabularRow from "./TabularRow";
 import TabularCell from "./TabularCell";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import LabelMapper from "../labels/LabelMapper";
 import Parse from "../transform/Parse";
+import ModalController from "./ModalController";
+import TabularModal from "./TabularModal";
 
 function TabularView({recordList, objectName, recordSelected}){
+    const [noRecordModalOpen, setNoRecordModalOpen] = useState(false);
+    const [modalKey, setModalKey] = useState(0);
 
     if(!recordList){
         return;
@@ -37,11 +41,27 @@ function TabularView({recordList, objectName, recordSelected}){
         recordSelected(fieldName, objectName, recordId);
     }
 
+    function modalButtonPressed(){
+        Logger.log("true")
+        setModalKey(modalKey + 1);
+        setNoRecordModalOpen(true);
+    }
+
+    function modalClosed(event){
+        Logger.log("false")
+        setModalKey(modalKey + 1);
+        setNoRecordModalOpen(false);
+        recordSelected(null, objectName, event.id);
+    }
+
     return (
 
         <div>
             <span>{objectName}</span>
-            <Table celled color="red">
+
+            {
+                recordList?.length > 0 ? 
+                <Table celled color="red">
                 <TableHeader>
                     <TableRow>
                         {fields.map(field => (
@@ -76,6 +96,26 @@ function TabularView({recordList, objectName, recordSelected}){
                 </TableBody>
 
             </Table>
+
+            :
+
+            <div>
+                <div>
+
+                <span>No records where found</span>
+                    <Button onClick={modalButtonPressed} style={{marginLeft: "20px"}}>Create a {objectName}?</Button>
+                </div>
+
+                <div>
+                    <TabularModal entityName={objectName} 
+                        childModalClosed={modalClosed} showModal={noRecordModalOpen} modalKey={modalKey}/>
+                </div>
+                
+            </div>
+
+            }
+            
+           
 
         </div>
     )

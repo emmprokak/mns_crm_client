@@ -18,7 +18,6 @@ import RequestService from '../service/RequestService';
 function ModalController({modalClosed, triggerButton, objectName, entry, actionType}){
     const [open, setOpen] = useState(true)
     const [finalEntry, setFinalEntry] = useState(null);
-    const [actionResponse, setActionResponse] = useState(null); // TODO: eval if needed
 
     const buttonConfig = {
       "create" : "blue",
@@ -48,7 +47,6 @@ function ModalController({modalClosed, triggerButton, objectName, entry, actionT
 
       Logger.log(response);
 
-      setActionResponse(response.data);
       modalClosed(response.data);
       setOpen(false);
     }
@@ -85,7 +83,7 @@ function ModalController({modalClosed, triggerButton, objectName, entry, actionT
 
       <div style={{border : "1px solid gray", borderRadius: "10px", padding: "20px 10px", textAlign: "right"}}>
         <ModalActions>
-          <Button onClick={() => setOpen(false)}  color='gray'>
+          <Button onClick={() => setOpen(false)}>
             Cancel 
           </Button>
 

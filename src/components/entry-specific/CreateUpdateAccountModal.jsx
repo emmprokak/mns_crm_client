@@ -11,18 +11,6 @@ function CreateAccountModal({entry, bubbleUpFinalEntry, actionType}){
     const [industryOptions, setIndustryOptions] = useState([]);
     const [accountTypeOptions, setAccountTypeOptions] = useState([]);
     const [accDetails, setAccDetails] = useState({});
-    // const [prevAccountDetails, setPrevAccountDetails] = useState({
-    //     companyName : "",
-    //     industry : "",
-    //     active : "",
-    //     billingAddress : "",
-    //     revenue : "",
-    //     description : "",
-    //     type : "",
-    //     website : "",
-    //     clientRating : "",
-    //     vat : ""
-    // })
 
     const UPDATE_ACCOUNT_ACTION = "updateAccount";
 

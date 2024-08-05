@@ -19,19 +19,16 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
     const [chosenActionType, setChosenActionType] = useState("");
     const [relationshipFields, setRelationshipFields] = useState([]);
 
-
-
     const nonRenderableFields = ["id", "parentId", "account", "accountId", "relatedAccountId", "relatedLeadId", "relatedOpportunityId"];
 
     useEffect(() => {
         const loadData = async () => {
             const result = await RequestService.getSingleRecordComplete(objectName, entryId);
-            console.log(entry)
+            Logger.log(entry);
             setEntry(result);
         };
 
         loadData();
-        Logger.log(`object name has val = ${objectName}`)
     }, [entryId]);
 
     useEffect(() => {
@@ -55,7 +52,7 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
                 continue;
             }
 
-            //related entry arrays
+            // related entry arrays
             if(Array.isArray(entry[field])){
                 Logger.log("added to rel fields");
 
@@ -95,9 +92,7 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
     }
 
     function relatedRecordSelected(relatedEntrySelectedEvent){
-        // setModalKey(modalKey + 1)
         bubbleUpEntryIdChange(relatedEntrySelectedEvent);
-        // setModalKey(modalKey + 1); // responsible for random opening of modal bug
     }
 
     return(

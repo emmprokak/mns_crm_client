@@ -7,6 +7,7 @@ import CreateUpdateContactModal from "./entry-specific/CreateUpdateContactModal"
 import CreateUpdateLeadModal from "./entry-specific/CreateUpdateLeadModal";
 import CreateUpdateOpportunityModal from "./entry-specific/CreateUpdateOpportunityModal";
 import CreateUpdateTaskModal from "./entry-specific/CreateUpdateTaskModal";
+import CreateUpdateCaseModal from "./entry-specific/CreateUpdateCaseModal";
 
 function ModalContentHandler({entry, actionType, entryName, bubbleUpFinalEntry}){
     const [createOrUpdateAccount, setCreateOrUpdateAccount] = useState(false);
@@ -14,6 +15,7 @@ function ModalContentHandler({entry, actionType, entryName, bubbleUpFinalEntry})
     const [createOrUpdateLead, setCreateOrUpdateLead] = useState(false);
     const [createOrUpdateOpportunity, setCreateOrUpdateOpportunity] = useState(false);
     const [createOrUpdateTask, setCreateOrUpdateTask] = useState(false);
+    const [createOrUpdateCase, setCreateOrUpdateCase] = useState(false);
     const [genericDelete, setGenericDelete] = useState(false);
 
     useEffect(() => {
@@ -23,7 +25,7 @@ function ModalContentHandler({entry, actionType, entryName, bubbleUpFinalEntry})
     function updateContentType(){
         resetModalContentFlags();
         Logger.log(`${actionType} ^ ${entryName}`);
-        
+
         if((actionType === "create" || actionType === "update") && entryName === "Account"){
             setCreateOrUpdateAccount(true);
             return;
@@ -49,6 +51,12 @@ function ModalContentHandler({entry, actionType, entryName, bubbleUpFinalEntry})
             return;
         }
 
+        if((actionType === "create" || actionType === "update") && entryName === "Case"){
+            setCreateOrUpdateCase(true);
+            return;
+        }
+
+
         if(actionType === "delete"){
             setGenericDelete(true);
             return;
@@ -61,6 +69,7 @@ function ModalContentHandler({entry, actionType, entryName, bubbleUpFinalEntry})
         setCreateOrUpdateLead(false);
         setCreateOrUpdateOpportunity(false);
         setCreateOrUpdateTask(false);
+        setCreateOrUpdateCase(false);
         setGenericDelete(false);
     }
 
@@ -98,6 +107,13 @@ function ModalContentHandler({entry, actionType, entryName, bubbleUpFinalEntry})
             {       
                 createOrUpdateTask ? 
                 <CreateUpdateTaskModal entry={entry} bubbleUpFinalEntry={bubbleUpFinalEntry} actionType={actionType}/>
+                :
+                <div></div>
+            }
+
+            {       
+                createOrUpdateCase ? 
+                <CreateUpdateCaseModal entry={entry} bubbleUpFinalEntry={bubbleUpFinalEntry} actionType={actionType}/>
                 :
                 <div></div>
             }

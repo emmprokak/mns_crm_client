@@ -45,7 +45,13 @@ class LabelMapper {
         "relatedOpportunity" : "Related Opportunity",
         "dueDate" : "Due Date",
         "reason" : "Reason",
-        "name" : "Name"
+        "name" : "Name",
+        "severity": "Severity",
+        "source" : "Source",
+        "category" : "Category",
+        "createdDate": "Created Date",
+        "relatedContact" : "Related Contact",
+        "closedDate": "Closed Date"
 
     }
 }

@@ -51,7 +51,7 @@ function EntryPointer({entryId, entryFieldToDisplay, entityName, dataId, bubbleU
         const comboboxOptions = [{key: "None", value: null, text: "None"}]; // default value
         for(let record of records){
             if(record.id !== entryId){
-                comboboxOptions.push({key: record.id, value: record.id, text: record[getComboboxOptionDisplayFieldName()]})
+                comboboxOptions.push({key: record.id, value: record.id, text: getComboboxOptionDisplayLabel(record)})
             }
         }
 
@@ -59,16 +59,20 @@ function EntryPointer({entryId, entryFieldToDisplay, entityName, dataId, bubbleU
     }
 
     function appendOption(singleRecord){
-        const comboboxOptions = [...optionRecords, {key: singleRecord.id, value: singleRecord.id, text: singleRecord[getComboboxOptionDisplayFieldName()]}];
+        const comboboxOptions = [...optionRecords, {key: singleRecord.id, value: singleRecord.id, text: getComboboxOptionDisplayLabel(singleRecord)}];
         setOptionRecords(comboboxOptions);
     }
 
-    function getComboboxOptionDisplayFieldName(){
+    function getComboboxOptionDisplayLabel(entry){
         if(entityName === "opportunity"){
-            return "title";
+            return entry["title"];
         }
 
-        return "companyName";
+        if(entityName === "contact"){
+            return entry["firstName"] + " " + entry["lastName"];
+        }
+
+        return entry["companyName"];
     }
 
     function sendUpdate(event, {name, value}){

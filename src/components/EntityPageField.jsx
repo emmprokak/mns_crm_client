@@ -30,6 +30,10 @@ function EntityPageField({fieldName, fieldValue, entityName, relatedEntrySelecte
         if("expectedRevenue" in entry){
             return "Opportunity";
         }
+
+        if("severity" in entry){
+            return "Case";
+        }
     }
 
     function renderFieldValue(){

@@ -16,7 +16,7 @@ function TabularView({recordList, objectName, recordSelected}){
         return;
     }
 
-    const nonRenderableFields = ["id", "account", "parentId", "accountId", "relatedAccountId", "relatedLeadId", "relatedOpportunityId"];
+    const nonRenderableFields = ["id", "account", "parentId", "accountId", "relatedAccountId", "relatedLeadId", "relatedOpportunityId", "relatedContactId"];
     const fields = parseFields(recordList[0]);
 
     function parseFields(demoRecord){
@@ -42,13 +42,11 @@ function TabularView({recordList, objectName, recordSelected}){
     }
 
     function modalButtonPressed(){
-        Logger.log("true")
         setModalKey(modalKey + 1);
         setNoRecordModalOpen(true);
     }
 
     function modalClosed(event){
-        Logger.log("false")
         setModalKey(modalKey + 1);
         setNoRecordModalOpen(false);
         recordSelected(null, objectName, event.id);

@@ -15,6 +15,14 @@ class Parse {
                 return val["companyName"];
             }
 
+            if(objectName === "Case" && fieldName === "relatedAccount"){
+                return val["companyName"];
+            }
+
+            if(objectName === "Case" && fieldName === "relatedContact"){
+                return val["firstName"] + " " + val["lastName"];
+            }
+
             if(objectName === "Task" && fieldName === "relatedLead"){
                 return val["companyName"];
             }
@@ -30,7 +38,7 @@ class Parse {
             return val ? "yes" : "no";
         }
 
-        if(fieldName === "birthdate" || fieldName === "dueDate"){
+        if(fieldName === "birthdate" || fieldName === "dueDate" || fieldName === "createdDate" || fieldName === "closedDate"){
             return val.slice(0, 10);
         }
 
@@ -62,6 +70,14 @@ class Parse {
             return [val["id"], val["title"]];
         }
 
+        if(entityName === "Case" && fieldName === "relatedAccount"){
+            return [val["id"], val["companyName"]];
+        }
+
+        if(entityName === "Case" && fieldName === "relatedContact"){
+            return [val["id"], val["firstName"] + " " + val["lastName"]];
+        }
+
 
         return ["invalid relationship object handling", ""];
     }
@@ -70,7 +86,7 @@ class Parse {
         if(!inputStr){
             return;
         }
-        
+
         const firstLetter = inputStr.charAt(0)
 
         const firstLetterCap = firstLetter.toUpperCase()

@@ -23,12 +23,10 @@ function App() {
       {key: '2', name : 'Contact', content : 'Contact'},
       {key: '3', name : 'Lead', content : 'Lead'},
       {key: '4', name : 'Opportunity', content : 'Opportunity'},
-      {key: '5', name : 'Task', content : 'Task'}
+      {key: '5', name : 'Task', content : 'Task'},
+      {key: '6', name : 'Case', content : 'Case'}
     ];
   }
-  // useEffect(() => {
-
-  // }, [currentObjectId]);
 
   function handleItemClick(event){
     setActiveItem(event.target.text);
@@ -63,7 +61,7 @@ function App() {
     <div>
       <Header as='h2' icon='users' content='MNS CRM'/>
 
-      <Grid columns={3} doubling>
+      <Grid columns={2} doubling>
         <GridColumn>
           <Menu>
              {

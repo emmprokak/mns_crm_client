@@ -94,6 +94,44 @@ class RequestService{
            
         ]
     }
+
+    static async getCaseStatusOptions(){
+        return [
+            {text: "New", value: "New"},
+            {text: "In progress", value: "In progress"},
+           
+        ]
+    }
+
+    static async getCaseSourceOptions(){
+        return [
+            {text: "Email", value: "Email"},
+            {text: "Phone", value: "Phone"},
+        ]
+    }
+
+    static async getCaseSeverityOptions(){
+        return [
+            {text: "1", value: "1"},
+            {text: "2", value: "2"},
+           
+        ]
+    }
+
+    static async getCaseReasonOptions(){
+        return [
+            {text: "support", value: "support"},
+            {text: "communication", value: "communication"},
+           
+        ]
+    }
+
+    static async getCaseCategoryOptions(){
+        return [
+            {text: "customer experience", value: "customer experience"},
+            {text: "sales", value: "sales"},
+        ]
+    }
     
     static async getAllAccounts(){
        return await this.getAllRecords("account")

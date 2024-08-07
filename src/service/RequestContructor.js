@@ -26,6 +26,11 @@ class RequestConstructor{
     static getEntityRecordsRequestLimit(ipAddress, port, protocol, entityName, limitNumber, orderByField, orderType){
         return `${protocol}://${ipAddress}:${port}/api/${entityName}/all?limit=${limitNumber}&orderByField=${orderByField}&orderType=${orderType}`;
     }
+    
+    static getConfigRecordsByType(ipAddress, port, protocol, configType){
+        return `${protocol}://${ipAddress}:${port}/api/config/all/${configType}`;
+    }
+
 }
 
 export default RequestConstructor;

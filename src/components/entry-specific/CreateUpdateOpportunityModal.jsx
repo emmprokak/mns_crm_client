@@ -6,6 +6,7 @@ import { Logger } from "../../service/Logger";
 import Checkbox from "../data-type components/Checkbox";
 import TextInput from "../data-type components/TextInput";
 import EntryPointer from "../data-type components/EntryPointer";
+import Parse from "../../transform/Parse";
 
 function CreateUpdateOpportunityModal({entry, bubbleUpFinalEntry, actionType}){
     const [opptyStatusOptions, setOpptyStatusOptions] = useState([]);
@@ -16,15 +17,15 @@ function CreateUpdateOpportunityModal({entry, bubbleUpFinalEntry, actionType}){
 
     useEffect(() => {
         const retrieveConfig = async () => {
-            const statusOptions = await RequestService.getOpptyStatusOptions();
+            const statusOptions = await RequestService.getConfigOptionsByType("opptyStatus");
             if(statusOptions){
-                setOpptyStatusOptions(statusOptions);
+                setOpptyStatusOptions(Parse.parseComboboxOptions(statusOptions));
             }
 
 
-            const typeOptions = await RequestService.getOpptyTypeOptions();
+            const typeOptions = await RequestService.getConfigOptionsByType("opptyType");
             if(typeOptions){
-                setOpptyTypeOptions(typeOptions);
+                setOpptyTypeOptions(Parse.parseComboboxOptions(typeOptions));
             }
 
         };

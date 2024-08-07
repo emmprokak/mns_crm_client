@@ -112,6 +112,15 @@ class Parse {
 
         return firstLetterCap + remainingLetters;
     }
+
+    static parseComboboxOptions(optionList){
+        const result = [];
+        for(let option of optionList){
+            result.push({"text" : option.displayText, "value" : option.apiValue});
+        }
+
+        return result;
+    }
 }
 
 export default Parse;

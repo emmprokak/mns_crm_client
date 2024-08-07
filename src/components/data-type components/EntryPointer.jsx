@@ -6,7 +6,7 @@ import EventGenerator from "../../events/EventGenerator";
 import Parse from "../../transform/Parse";
 
 function EntryPointer({entryId, entryFieldToDisplay, entityName, dataId, bubbleUpUpdate, actionName, value}){
-    const [optionRecords, setOptionRecords] = useState([]);
+    const [optionRecords, setOptionRecords] = useState([{key: "None", value: null, text: "None"}]);
     const [entrySelection, setEntrySelection] = useState({});
     const [loading, setLoading] = useState(false);
     const [placeholderText, setPlaceholderText] = useState("");
@@ -14,12 +14,6 @@ function EntryPointer({entryId, entryFieldToDisplay, entityName, dataId, bubbleU
 
     useEffect(() => { 
        setPlaceholderText(`Select ${Parse.firstLetterCapital(entityName)}`);
-
-       // TODO; fix in  sec
-        // if(entryId){
-        //     setEntrySelection(entryId);
-        // }
-
         setLoading(true);
 
         const fetchSampleRecords = async () => {
@@ -47,20 +41,46 @@ function EntryPointer({entryId, entryFieldToDisplay, entityName, dataId, bubbleU
 
     }, [entryId]);
 
-    function parseOptions(records){
-        const comboboxOptions = [{key: "None", value: null, text: "None"}]; // default value
-        for(let record of records){
-            if(record.id !== entryId){
-                comboboxOptions.push({key: record.id, value: record.id, text: getComboboxOptionDisplayLabel(record)})
-            }
-        }
 
-        setOptionRecords(comboboxOptions);
+    /* use functional form of state update to avoid race conditions,
+        react state updates are batched and asynchronous */
+    function parseOptions(records){
+        // const comboboxOptions = []; // default value
+        // for(let record of records){
+        //     if(record.id !== entryId){
+        //         comboboxOptions.push({key: record.id, value: record.id, text: getComboboxOptionDisplayLabel(record)})
+        //     }
+        // }
+        // setOptionRecords(comboboxOptions);
+
+        setOptionRecords(prevOptions => {
+            const existingIds = new Set(prevOptions.map(option => option.key));
+            const newOptions = records.filter(record => !existingIds.has(record.id))
+                                      .map(record => ({ key: record.id, value: record.id, text: getComboboxOptionDisplayLabel(record) }));
+            
+            return [
+                ...prevOptions,
+                ...newOptions
+            ];
+        });
+
     }
 
+    /* use functional form of state update to avoid race conditions,
+        react state updates are batched and asynchronous */
     function appendOption(singleRecord){
-        const comboboxOptions = [...optionRecords, {key: singleRecord.id, value: singleRecord.id, text: getComboboxOptionDisplayLabel(singleRecord)}];
-        setOptionRecords(comboboxOptions);
+        // const comboboxOptions = [...optionRecords, {key: singleRecord.id, value: singleRecord.id, text: getComboboxOptionDisplayLabel(singleRecord)}];
+        // setOptionRecords(comboboxOptions);
+        setOptionRecords(prevOptions => {
+            if (prevOptions.some(option => option.key === singleRecord.id)) {
+                return prevOptions;
+            }
+
+            return [
+                ...prevOptions,
+                { key: singleRecord.id, value: singleRecord.id, text: getComboboxOptionDisplayLabel(singleRecord) }
+            ];
+        });
     }
 
     function getComboboxOptionDisplayLabel(entry){

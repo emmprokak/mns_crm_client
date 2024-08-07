@@ -8,131 +8,6 @@ class RequestService{
     static PROTOCOL = "http";
     static PORT = "8080";
 
-    static async getIndustryOptions(){
-        return [
-            {text: "IT", value: "IT"},
-            {text: "Food", value: "Food"},
-            {text: "Retail", value: "Retail"}
-        ]
-    }
-
-    static async getAccountTypes(){
-        return [
-            {text: "person", value: "person"},
-            {text: "company", value: "company"},
-        ]
-    }
-
-    static async getPrefixOptions(){
-        return [
-            {text: "Mr", value: "Mr"},
-            {text: "Ms", value: "Ms"},
-            {text: "Mrs", value: "Mrs"},
-        ]
-    }
-
-    static async getLeadStatusOptions(){
-        return [
-            {text: "Discovery", value: "Discovery"},
-            {text: "Sent Email", value: "Send Email"},
-            {text: "Received Email", value: "Received Email"},
-            {text: "Confirmation", value: "Confirmation"},
-            {text: "Success", value: "Success"},
-            {text: "Failure", value: "Failure"}
-        ]
-    }
-
-    static async getRoleOptions(){
-        return [
-            {text: "PM", value: "PM"},
-            {text: "Developer", value: "Developer"},
-            {text: "Analyst", value: "Analyst"},
-            {text: "Consultant", value: "Consultant"},
-            {text: "Architect", value: "Architect"},
-            {text: "Manager", value: "Manager"},
-            {text: "Employee", value: "Employee"},
-            {text: "Representative", value: "Representative"},
-            {text: "CEO", value: "CEO"},
-            {text: "CIO", value: "CIO"},
-        ]
-    }
-
-    static async getOpptyStatusOptions(){
-        return [
-            {text: "new", value: "new"},
-            {text: "discovery", value: "discovery"},
-            {text: "quote", value: "quote"},
-            {text: "approval", value: "approval"},
-            {text: "success", value: "success"},
-            {text: "failure", value: "failure"},
-        ]
-    }
-
-    static async getOpptyTypeOptions(){
-        return [
-            {text: "sell", value: "sell"},
-            {text: "upsell", value: "upsell"},
-            {text: "winback", value: "winback"}
-        ]
-    }
-
-    static async getTaskStatusOptions(){
-        return [
-            {text: "Discovery", value: "Discovery"},
-            {text: "Sent Email", value: "Send Email"},
-            {text: "Received Email", value: "Received Email"},
-            {text: "Confirmation", value: "Confirmation"},
-            {text: "Success", value: "Success"},
-            {text: "Failure", value: "Failure"}
-        ]
-    }
-
-    static async getTaskTypeOptions(){
-        return [
-            {text: "Action", value: "Action"},
-            {text: "Informative", value: "Informative"},
-           
-        ]
-    }
-
-    static async getCaseStatusOptions(){
-        return [
-            {text: "New", value: "New"},
-            {text: "In progress", value: "In progress"},
-           
-        ]
-    }
-
-    static async getCaseSourceOptions(){
-        return [
-            {text: "Email", value: "Email"},
-            {text: "Phone", value: "Phone"},
-        ]
-    }
-
-    static async getCaseSeverityOptions(){
-        return [
-            {text: "1", value: "1"},
-            {text: "2", value: "2"},
-           
-        ]
-    }
-
-    static async getCaseReasonOptions(){
-        return [
-            {text: "support", value: "support"},
-            {text: "communication", value: "communication"},
-           
-        ]
-    }
-
-    static async getCaseCategoryOptions(){
-        return [
-            {text: "customer experience", value: "customer experience"},
-            {text: "sales", value: "sales"},
-        ]
-    }
-    
     static async getAllAccounts(){
        return await this.getAllRecords("account")
     }
@@ -194,6 +69,13 @@ class RequestService{
         Logger.log(`del req = ${request}`)
         const response = await RequestUtil.makeHttpRequest(request, "DELETE");
         return response;
+    }
+
+    static async getConfigOptionsByType(configType){
+        const request = RequestConstructor.getConfigRecordsByType(this.IP_ADDRESS, this.PORT, this.PROTOCOL, configType);
+        const response = await RequestUtil.makeHttpRequest(request);
+
+        return response.data;
     }
 }
 

@@ -6,6 +6,7 @@ import { Logger } from "../../service/Logger";
 import Checkbox from "../data-type components/Checkbox";
 import TextInput from "../data-type components/TextInput";
 import EntryPointer from "../data-type components/EntryPointer";
+import Parse from "../../transform/Parse";
 
 function CreateAccountModal({entry, bubbleUpFinalEntry, actionType}){
     const [industryOptions, setIndustryOptions] = useState([]);
@@ -16,14 +17,14 @@ function CreateAccountModal({entry, bubbleUpFinalEntry, actionType}){
 
     useEffect(() => {
         const retrieveConfig = async () => {
-            const options = await RequestService.getIndustryOptions();
+            const options = await RequestService.getConfigOptionsByType("industry");
             if(options){
-                setIndustryOptions(options);
+                setIndustryOptions(Parse.parseComboboxOptions(options));
             }
 
-            const accountTypes = await RequestService.getAccountTypes();
+            const accountTypes = await RequestService.getConfigOptionsByType("accountType");
             if(accountTypes){
-                setAccountTypeOptions(accountTypes);
+                setAccountTypeOptions(Parse.parseComboboxOptions(accountTypes));
             }
         };
 

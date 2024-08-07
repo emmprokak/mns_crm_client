@@ -6,6 +6,7 @@ import { Logger } from "../../service/Logger";
 import Checkbox from "../data-type components/Checkbox";
 import TextInput from "../data-type components/TextInput";
 import EntryPointer from "../data-type components/EntryPointer";
+import Parse from "../../transform/Parse";
 
 function CreateUpdateTaskModal({entry, bubbleUpFinalEntry, actionType}){
     const [taskStatusOptions, setTaskStatusOptions] = useState([]);
@@ -16,14 +17,14 @@ function CreateUpdateTaskModal({entry, bubbleUpFinalEntry, actionType}){
 
     useEffect(() => {
         const retrieveConfig = async () => {
-            const statusOptions = await RequestService.getTaskStatusOptions();
+            const statusOptions = await RequestService.getConfigOptionsByType("taskStatus");
             if(statusOptions){
-                setTaskStatusOptions(statusOptions);
+                setTaskStatusOptions(Parse.parseComboboxOptions(statusOptions));
             }
 
-            const typeOptions = await RequestService.getTaskTypeOptions();
+            const typeOptions = await RequestService.getConfigOptionsByType("taskType");
             if(typeOptions){
-                setTaskTypeOptions(typeOptions);
+                setTaskTypeOptions(Parse.parseComboboxOptions(typeOptions));
             }
         
         };

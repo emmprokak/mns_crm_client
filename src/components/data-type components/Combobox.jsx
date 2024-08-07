@@ -22,7 +22,6 @@ function Combobox({options, bubbleUpUpdate, dataId, actionName, value}){
 
     return (
         <div>
-             {/* <Select placeholder='Select your country' options={options} onChange={optionSelected} value={selectedValue} /> */}
             <Dropdown
                 fluid
                 selection

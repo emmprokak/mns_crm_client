@@ -6,6 +6,7 @@ import { Logger } from "../../service/Logger";
 import Checkbox from "../data-type components/Checkbox";
 import TextInput from "../data-type components/TextInput";
 import EntryPointer from "../data-type components/EntryPointer";
+import Parse from "../../transform/Parse";
 
 function CreateUpdateCaseModal({entry, bubbleUpFinalEntry, actionType}){
     const [statusOptions, setStatusOptions] = useState([]);
@@ -19,29 +20,29 @@ function CreateUpdateCaseModal({entry, bubbleUpFinalEntry, actionType}){
 
     useEffect(() => {
         const retrieveConfig = async () => {
-            const statusOptions = await RequestService.getCaseStatusOptions();
+            const statusOptions = await RequestService.getConfigOptionsByType("caseStatus");
             if(statusOptions){
-                setStatusOptions(statusOptions);
+                setStatusOptions(Parse.parseComboboxOptions(statusOptions));
             }
 
-            const reasonOptions = await RequestService.getCaseReasonOptions();
+            const reasonOptions = await RequestService.getConfigOptionsByType("caseReason");
             if(reasonOptions){
-                setReasonOptions(reasonOptions);
+                setReasonOptions(Parse.parseComboboxOptions(reasonOptions));
             }
 
-            const sourceOptions = await RequestService.getCaseSourceOptions();
+            const sourceOptions = await RequestService.getConfigOptionsByType("caseSource");
             if(sourceOptions){
-                setSourceOptions(sourceOptions);
+                setSourceOptions(Parse.parseComboboxOptions(sourceOptions));
             }
 
-            const categoryOptions = await RequestService.getCaseCategoryOptions();
+            const categoryOptions = await RequestService.getConfigOptionsByType("caseCategory");
             if(categoryOptions){
-                setCategoryOptions(categoryOptions);
+                setCategoryOptions(Parse.parseComboboxOptions(categoryOptions));
             }
 
-            const severityOptions = await RequestService.getCaseSeverityOptions();
+            const severityOptions = await RequestService.getConfigOptionsByType("caseSeverity");
             if(severityOptions){
-                setSeverityOptions(severityOptions);
+                setSeverityOptions(Parse.parseComboboxOptions(severityOptions));
             }
 
         };

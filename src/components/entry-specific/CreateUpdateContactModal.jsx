@@ -6,6 +6,7 @@ import { Logger } from "../../service/Logger";
 import Checkbox from "../data-type components/Checkbox";
 import TextInput from "../data-type components/TextInput";
 import EntryPointer from "../data-type components/EntryPointer";
+import Parse from "../../transform/Parse";
 
 function CreateUpdateContactModal({entry, bubbleUpFinalEntry, actionType}){
     const [prefixOptions, setPrefixOptions] = useState([]);
@@ -16,14 +17,14 @@ function CreateUpdateContactModal({entry, bubbleUpFinalEntry, actionType}){
 
     useEffect(() => {
         const retrieveConfig = async () => {
-            const prefixOptions = await RequestService.getPrefixOptions();
+            const prefixOptions = await RequestService.getConfigOptionsByType("prefix");
             if(prefixOptions){
-                setPrefixOptions(prefixOptions);
+                setPrefixOptions(Parse.parseComboboxOptions(prefixOptions));
             }
 
-            const roleOptions = await RequestService.getRoleOptions();
+            const roleOptions = await RequestService.getConfigOptionsByType("role");
             if(roleOptions){
-                setRoleOptions(roleOptions);
+                setRoleOptions(Parse.parseComboboxOptions(roleOptions));
             }
         };
 

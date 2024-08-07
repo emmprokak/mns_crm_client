@@ -25,12 +25,13 @@
 
 .field-group-container{
   box-sizing: border-box;
-  border: 2px solid grey;
+  border: 2px solid #3A0CA3;
   border-radius: 15px;;
   padding: 5px 10px;
   width: 65%;
   margin: 10px 15px;;
   display: inline-block;
+  background-color: white;
 }
 
 .field-label{
@@ -48,22 +49,20 @@
 }
 
 .entity-header{
-  border: 2px solid red;
+  border: 2px solid #3A0CA3;
   border-radius: 15px;
   min-height: 100px;
-  /* background-color: whitesmoke; */
   padding: 10px;
   margin: 20px;
   width: 35%;
+  background-color: white;
   display: inline-block;
 }
 
 .entity-header-object{
   font-size: 600;
   font-size: 2em;
-  /* padding-bottom: 4px; */
   border-radius: 15px;
-  /* border-bottom: 1px solid black; */
 }
 
 .entity-header-preview-fields{
@@ -88,12 +87,15 @@
 }
 
 .related-records-area{
-  border: 1px solid red;
+  border: 2px solid #3A0CA3;
   color: red;
   display: inline-block;
   width: 400px;
   height: 500px;
   margin-left: 50px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
 }
 
 .main-record-data-container{

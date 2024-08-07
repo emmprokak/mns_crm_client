@@ -1,14 +1,14 @@
 import { Logger } from "../service/Logger";
 import Parse from "../transform/Parse";
+import "../App.css";
 
 function TabularCell({recordObject, fieldName, cellClicked, entityName}){
 
-    //TODO: fix lookups
     const linkableFields = ["companyName", "firstName", "lastName", "title", "name", "sourceLead"];
 
     function renderFieldValue(){
         if(linkableFields.includes(fieldName)){
-            return <a id={`${fieldName}:${recordObject.id}`} style={{cursor : "pointer"}}
+            return <a id={`${fieldName}:${recordObject.id}`} className="tabular-clickable-field"
                         onClick={cellClicked}>
                             {Parse.parseTableValue(recordObject[fieldName], fieldName, entityName) }
                     </a>;

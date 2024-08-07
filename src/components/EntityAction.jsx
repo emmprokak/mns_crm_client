@@ -40,7 +40,7 @@ function EntityAction({actionLabel, objectName, entryId, actionClicked}){
 
     return (
         <div>
-            <Button color='blue' onClick={performAction}>{`${actionLabel} ${objectName}`}</Button>
+            <Button color='blue' onClick={performAction} style={{marginLeft: "10px"}}>{`${actionLabel} ${objectName}`}</Button>
         </div>
     )
 }

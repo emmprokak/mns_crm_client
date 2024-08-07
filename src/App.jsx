@@ -64,11 +64,11 @@ function App() {
   
   return (
     <div>
-      <Header as='h2' icon='users' content='MNS CRM'/>
+      <Header as='h2' icon='users' content='MNS CRM' style={{marginLeft: "10px", marginTop: "15px"}}/>
 
-      <Grid columns={2} doubling>
+      <Grid columns="3">
         <GridColumn>
-          <Menu>
+          <Menu style={{marginLeft: "10px"}}>
              {
               getNavItems().map((item) => (
                 <MenuItem
@@ -90,6 +90,7 @@ function App() {
         singleRecordView ? 
         <div>
           <EntityPage objectName={currentObjectName} entryId={currentObjectId} bubbleUpEntryIdChange={displayedRecordChanged}/>
+          {/* boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)" */}
         </div>
         :
         <div>

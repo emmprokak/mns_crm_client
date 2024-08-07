@@ -1,4 +1,4 @@
-import { Button, Tab, Table, TableBody, TableCell, TableHeader, TableHeaderCell, TableRow } from "semantic-ui-react";
+import { Button, Header, Tab, Table, TableBody, TableCell, TableHeader, TableHeaderCell, TableRow } from "semantic-ui-react";
 import { Logger } from "../service/Logger";
 import TabularRow from "./TabularRow";
 import TabularCell from "./TabularCell";
@@ -33,12 +33,10 @@ function TabularView({recordList, objectName, recordSelected}){
     }
 
     function fieldClicked(event){
-        Logger.log(event.target.id);
         const compositeValue = event.target.id;
         const fieldName = compositeValue.split(":")[0];
-        const recordId = compositeValue.split(":")[1];
-        Logger.log(`record selected with values = ${fieldName}, ${objectName}, ${recordId}`)
-        recordSelected(fieldName, objectName, recordId);
+        const entryId = compositeValue.split(":")[1];
+        recordSelected(fieldName, objectName, entryId);
     }
 
     function modalButtonPressed(){
@@ -55,7 +53,8 @@ function TabularView({recordList, objectName, recordSelected}){
     return (
 
         <div>
-            <span>{objectName}</span>
+            <Header as="h2">Viewing {objectName} entries </Header>
+            
 
             {
                 recordList?.length > 0 ? 

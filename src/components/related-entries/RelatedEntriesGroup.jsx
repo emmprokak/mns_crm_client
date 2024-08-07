@@ -9,7 +9,7 @@ function RelatedEntriesGroup({entityName, relationshipName, entryId, relatedEntr
 
     return (
         <div>
-            <div>
+            <div style={{margin: "10px 0"}}>
                 <span style={{color: "blue", fontSize: "1.4em"}}> {relationshipName} ({relatedEntriesList?.length})</span>
             </div>
 

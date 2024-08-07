@@ -14,10 +14,7 @@ function Combobox({options, bubbleUpUpdate, dataId, actionName, value}){
         if(!value){
             return;
         }
-        // TODO eval if neede
-        // if(options.include(value)){
-            setSelectedValue(value);
-        // }
+        setSelectedValue(value);
     }, [value]);
 
     return (

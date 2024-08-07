@@ -137,15 +137,21 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
                         </div>
                     </div>
 
-                    <div className="related-records-area">
-                            {
-                                relationshipFields.map(field => (
-                                    // pointerToParentName, relatedEntriesDisplayField
-                                    <RelatedEntriesGroup key={"rel" + field} entityName={objectName} relationshipName={field} entryId={entryId} relatedEntriesList={entry[field]}
-                                        relatedEntrySelected={relatedRecordSelected} />
-                                ))
-                            }
-                    </div>
+                    {
+                        relationshipFields?.length > 0 ?
+                            <div className="related-records-area">
+                                    {
+                                        relationshipFields.map(field => (
+                                            <RelatedEntriesGroup key={"rel" + field} entityName={objectName} relationshipName={field} entryId={entryId} relatedEntriesList={entry[field]}
+                                                relatedEntrySelected={relatedRecordSelected} />
+                                        ))
+                                    }
+                            </div>
+                            :
+                            <div></div>
+                    }
+
+                    
                 </div>
 
 

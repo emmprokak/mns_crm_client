@@ -30,7 +30,7 @@
   padding: 5px 10px;
   width: 65%;
   margin: 10px 15px;;
-  display: inline-block;
+  display: inline-flex;
   background-color: white;
 }
 
@@ -89,9 +89,10 @@
 .related-records-area{
   border: 2px solid #3A0CA3;
   color: red;
-  display: inline-block;
-  width: 400px;
-  height: 500px;
+  display: inline-flex;
+  flex-direction: column;
+  width: 500px;
+  min-height: 500px;
   margin-left: 50px;
   background-color: white;
   border-radius: 10px;
@@ -102,4 +103,5 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  max-height: 2200px;
 }

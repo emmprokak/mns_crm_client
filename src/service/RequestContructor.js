@@ -31,6 +31,10 @@ class RequestConstructor{
         return `${protocol}://${ipAddress}:${port}/api/config/all/${configType}`;
     }
 
+    static getConvertLeadRequest(ipAddress, port, protocol, leadId){
+        return `${protocol}://${ipAddress}:${port}/api/process/lead-conversion/${leadId}`;
+    }
+
 }
 
 export default RequestConstructor;

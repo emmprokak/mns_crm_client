@@ -9,8 +9,9 @@ import CreateUpdateOpportunityModal from "./entry-specific/CreateUpdateOpportuni
 import CreateUpdateTaskModal from "./entry-specific/CreateUpdateTaskModal";
 import CreateUpdateCaseModal from "./entry-specific/CreateUpdateCaseModal";
 import CreateUpdateVoiceCallModal from "./entry-specific/CreateUpdateVoiceCallModal";
+import LeadConversionModal from "./entry-specific/LeadConversionModal";
 
-function ModalContentHandler({entry, actionType, entryName, bubbleUpFinalEntry}){
+function ModalContentHandler({entry, actionType, entryName, bubbleUpFinalEntry, entrySelected, showLeadConversionResult, leadConversionResultList}){
     const [createOrUpdateAccount, setCreateOrUpdateAccount] = useState(false);
     const [createOrUpdateContact, setCreateOrUpdateContact] = useState(false);
     const [createOrUpdateLead, setCreateOrUpdateLead] = useState(false);
@@ -18,6 +19,7 @@ function ModalContentHandler({entry, actionType, entryName, bubbleUpFinalEntry})
     const [createOrUpdateTask, setCreateOrUpdateTask] = useState(false);
     const [createOrUpdateCase, setCreateOrUpdateCase] = useState(false);
     const [createOrUpdateVoiceCall, setCreateOrUpdateVoiceCall] = useState(false);
+    const [convertLead, setConvertLead] = useState(false);
     const [genericDelete, setGenericDelete] = useState(false);
 
     useEffect(() => {
@@ -63,6 +65,11 @@ function ModalContentHandler({entry, actionType, entryName, bubbleUpFinalEntry})
             return;
         }
 
+        if(actionType === "convert" && entryName === "Lead"){
+            setConvertLead(true);
+            return;
+        }
+
 
         if(actionType === "delete"){
             setGenericDelete(true);
@@ -78,6 +85,7 @@ function ModalContentHandler({entry, actionType, entryName, bubbleUpFinalEntry})
         setCreateOrUpdateTask(false);
         setCreateOrUpdateCase(false);
         setCreateOrUpdateVoiceCall(false);
+        setConvertLead(false);
         setGenericDelete(false);
     }
 
@@ -129,6 +137,14 @@ function ModalContentHandler({entry, actionType, entryName, bubbleUpFinalEntry})
             {       
                 createOrUpdateVoiceCall ? 
                 <CreateUpdateVoiceCallModal entry={entry} bubbleUpFinalEntry={bubbleUpFinalEntry} actionType={actionType}/>
+                :
+                <div></div>
+            }
+
+            {
+                convertLead ? 
+                <LeadConversionModal leadEntry={entry} relatedEntrySelected={entrySelected} showResult={showLeadConversionResult}
+                conversionResultList={leadConversionResultList}/>
                 :
                 <div></div>
             }

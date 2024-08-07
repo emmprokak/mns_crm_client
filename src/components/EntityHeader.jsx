@@ -12,6 +12,15 @@ function EntityHeader({objectName, record, fieldCollection, entryActionClicked})
         entryActionClicked(objectName, record, actionType);
     }
 
+    function renderLeadConversionAction(){
+        if(objectName === "Lead" && record["status"] === "Success"){
+            return <EntityAction key="leadConversion" objectName={objectName}
+              entryId={record["id"]} actionLabel="Convert" actionClicked={actionClicked}/>;
+        }
+
+        return <div></div>;
+    }
+
 
     return (
         <div className="header-top-container">
@@ -40,6 +49,10 @@ function EntityHeader({objectName, record, fieldCollection, entryActionClicked})
                     standardActions.map(act => (
                         <EntityAction key={act} objectName={objectName} entryId={record["id"]} actionLabel={act} actionClicked={actionClicked}/>
                     ))
+                }
+
+                {
+                    renderLeadConversionAction()
                 }
             </div>
         </div>

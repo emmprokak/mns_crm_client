@@ -77,6 +77,13 @@ class RequestService{
 
         return response.data;
     }
+
+    static async sendConvertLead(leadEntry){
+        const request = RequestConstructor.getConvertLeadRequest(this.IP_ADDRESS, this.PORT, this.PROTOCOL, leadEntry.id);
+        Logger.log(`convert req = ${request}`)
+        const response = await RequestUtil.makeHttpRequest(request, "POST");
+        return response;
+    }
 }
 
 export default RequestService;

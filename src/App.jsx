@@ -49,6 +49,7 @@ function App() {
   }
 
   async function displayedRecordChanged(event){
+    Logger.log(event);
     if(!event.entryId){
       setCurrentObjectName(Parse.firstLetterCapital(event.entityName));
       await retrieveRecords(event.entityName);

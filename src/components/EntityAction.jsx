@@ -4,10 +4,6 @@ import { useEffect } from "react";
 
 function EntityAction({actionLabel, objectName, entryId, actionClicked}){
 
-    // useEffect(() => {
-    //     setActionToBePerformed();
-    // }, []);
-
     function performAction(){
         const createNewEntry = () => {
             actionClicked("create");
@@ -21,6 +17,10 @@ function EntityAction({actionLabel, objectName, entryId, actionClicked}){
             actionClicked("delete");
         };
 
+        const convertLead = () => {
+            actionClicked("convert");
+        };
+
        switch(actionLabel){
         case "Create":
             createNewEntry();
@@ -31,6 +31,9 @@ function EntityAction({actionLabel, objectName, entryId, actionClicked}){
         case "Delete":
             deleteEntry();
             break;
+        case "Convert":
+            convertLead();
+            break;
        }
     }
 
@@ -38,7 +41,6 @@ function EntityAction({actionLabel, objectName, entryId, actionClicked}){
     return (
         <div>
             <Button color='blue' onClick={performAction}>{`${actionLabel} ${objectName}`}</Button>
-
         </div>
     )
 }

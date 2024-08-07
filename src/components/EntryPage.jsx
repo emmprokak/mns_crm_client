@@ -85,6 +85,8 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
     }
 
     function childModalClosed(actionResponse){
+        Logger.log('received on entity page');
+        Logger.log(actionResponse)
         setEntry(actionResponse);
         bubbleUpEntryIdChange(EventGenerator.getRelatedLinkEvent(actionResponse.id, objectName));
         setShowModal(false);
@@ -105,6 +107,7 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
                  entry={entry}
                  actionType={chosenActionType}
                  key={modalKey}
+                 entrySelected={relatedRecordSelected}
                 />
                 :
                 <div></div>

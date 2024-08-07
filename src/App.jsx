@@ -56,7 +56,10 @@ function App() {
       return;
     }
     recordClicked(null, Parse.firstLetterCapital(event.entityName), event.entryId);    
+    setActiveItem(Parse.firstLetterCapital(event.entityName));
   }
+
+
   
   return (
     <div>

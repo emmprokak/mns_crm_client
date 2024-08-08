@@ -66,7 +66,7 @@ function App() {
     <div>
       <Header as='h2' icon='users' content='MNS CRM' style={{marginLeft: "10px", marginTop: "15px"}}/>
 
-      <Grid columns="3">
+      <Grid columns="2">
         <GridColumn>
           <Menu style={{marginLeft: "10px"}}>
              {

@@ -56,7 +56,8 @@ class LabelMapper {
         "relatedCase" : "Related Case",
         "duration" : "Duration (in seconds)",
         "callDate" : "Call Date",
-        "customerPhone" : "Customer Phone"
+        "customerPhone" : "Customer Phone",
+        "parentLead": "Source Lead"
 
     }
 }

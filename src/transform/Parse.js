@@ -39,6 +39,10 @@ class Parse {
                 return val["title"];
             }
 
+            if(objectName === "Account" && fieldName === "parentLead"){
+                return val["companyName"];
+            }
+
             return "object";
         }
 
@@ -92,7 +96,10 @@ class Parse {
 
         if(entityName === "Call" && fieldName === "relatedCase"){
             return [val["id"], val["title"]];
+        }
 
+        if(entityName === "Account" && fieldName === "parentLead"){
+            return [val["id"], val["companyName"]];
         }
 
 

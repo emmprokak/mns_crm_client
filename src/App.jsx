@@ -8,6 +8,9 @@ import 'semantic-ui-css/semantic.min.css';
 import EntityPage from './components/EntryPage';
 import Parse from './transform/Parse';
 
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+
 
 function App() {
   const [records, setRecords] = useState([]);
@@ -106,7 +109,12 @@ function App() {
         :
         <div></div>
       }
+
+      <div>
+      <ToastContainer />
+      </div>
     </div>
+    
   )
 }
 

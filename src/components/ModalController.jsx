@@ -14,6 +14,10 @@ import ModalContentHandler from './ModalContentHandler';
 import { Logger } from '../service/Logger';
 import RequestService from '../service/RequestService';
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+// toast.configure();
+
 
 function ModalController({modalClosed, triggerButton, objectName, entry, actionType, entrySelected}){
     const [open, setOpen] = useState(true)
@@ -29,6 +33,7 @@ function ModalController({modalClosed, triggerButton, objectName, entry, actionT
     }
 
     async function performAction(){
+
       setRenderLeadConversionResult(false);
 
       let action = () => Logger.log("invalid operation selected");
@@ -51,9 +56,21 @@ function ModalController({modalClosed, triggerButton, objectName, entry, actionT
       const entryDetails = actionType === "delete" || actionType === "convert" ? entry : finalEntry;
       Logger.log("sending request for ");
       Logger.log(entryDetails);
-      const response = await action(objectName.toLowerCase(), entryDetails);
+      let response;
+
+      try{
+        response = await action(objectName.toLowerCase(), entryDetails);
+
+      }catch(err){
+        Logger.log(err)
+      }
 
       Logger.log(response);
+
+      if(response.status != 200){
+        toast.error(response.response.data.message);
+        return;
+      }
 
       if(actionType === "convert"){
         setLeadConversionResult(response.data);

@@ -8,7 +8,7 @@ import RelatedEntriesGroup from "./related-entries/RelatedEntriesGroup";
 import EventGenerator from "../events/EventGenerator";
 
 
-function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
+function EntityPage({entityName, entryId, bubbleUpEntryIdChange}){
 
     const [entry, setEntry] = useState({});
     const [firstColFields, setFirstColFields] = useState([]);
@@ -23,7 +23,7 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
 
     useEffect(() => {
         const loadData = async () => {
-            const result = await RequestService.getSingleRecordComplete(objectName, entryId);
+            const result = await RequestService.getSingleRecordComplete(entityName, entryId);
             Logger.log(entry);
             setEntry(result);
         };
@@ -78,7 +78,7 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
         Logger.log(relFields);
     }
 
-    function actionClicked(objectName, entry, actionType){
+    function actionClicked(entityName, entry, actionType){
         setChosenActionType(actionType);
         setShowModal(true);
         setModalKey(modalKey + 1);
@@ -88,7 +88,7 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
         Logger.log('received on entity page');
         Logger.log(actionResponse)
         setEntry(actionResponse);
-        bubbleUpEntryIdChange(EventGenerator.getRelatedLinkEvent(actionResponse.id, objectName));
+        bubbleUpEntryIdChange(EventGenerator.getRelatedLinkEvent(actionResponse.id, entityName));
         setShowModal(false);
         setModalKey(modalKey + 1);
     }
@@ -103,7 +103,7 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
                 showModal ? 
                 <ModalController modalClosed={childModalClosed}
                  triggerButton={null}
-                 objectName={objectName}
+                 entityName={entityName}
                  entry={entry}
                  actionType={chosenActionType}
                  key={modalKey}
@@ -115,7 +115,7 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
 
             <div>
                 <div>
-                    <EntityHeader objectName={objectName} record={entry} fieldCollection={fieldTotal} entryActionClicked={actionClicked}/>
+                    <EntityHeader entityName={entityName} record={entry} fieldCollection={fieldTotal} entryActionClicked={actionClicked}/>
                 </div>
 
                 <div className="main-record-data-container">
@@ -123,7 +123,8 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
                         <div className="left-div">
                             {
                                 firstColFields.map(field => (
-                                    <EntityPageField key={field} fieldName={field} fieldValue={entry[field]} entityName={objectName} relatedEntrySelected={relatedRecordSelected}/>
+                                    <EntityPageField key={field} fieldName={field} fieldValue={entry[field]} entityName={entityName}
+                                         relatedEntrySelected={relatedRecordSelected}/>
                                 ))
                             }
                         </div>
@@ -131,7 +132,8 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
                         <div className="right-div">
                             {
                                 secondColFields.map(field => (
-                                    <EntityPageField key={field} fieldName={field} fieldValue={entry[field]} entityName={objectName} relatedEntrySelected={relatedRecordSelected}/>
+                                    <EntityPageField key={field} fieldName={field} fieldValue={entry[field]} entityName={entityName}
+                                         relatedEntrySelected={relatedRecordSelected}/>
                                 ))
                             }
                         </div>
@@ -142,7 +144,8 @@ function EntityPage({objectName, entryId, bubbleUpEntryIdChange}){
                             <div className="related-records-area">
                                     {
                                         relationshipFields.map(field => (
-                                            <RelatedEntriesGroup key={"rel" + field} entityName={objectName} relationshipName={field} entryId={entryId} relatedEntriesList={entry[field]}
+                                            <RelatedEntriesGroup key={"rel" + field} entityName={entityName} relationshipName={field}
+                                                 entryId={entryId} relatedEntriesList={entry[field]}
                                                 relatedEntrySelected={relatedRecordSelected} />
                                         ))
                                     }

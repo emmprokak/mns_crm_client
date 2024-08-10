@@ -1,45 +1,45 @@
 import { Logger } from "../service/Logger";
 
 class Parse {
-    static parseTableValue(val, fieldName, objectName){
+    static parseTableValue(val, fieldName, entityName){
         if(!val){
             return "-";
         }
 
         if(typeof val === "object"){
-            if((objectName === "Contact" || objectName === "Account") && fieldName === "parent"){
+            if((entityName === "Contact" || entityName === "Account") && fieldName === "parent"){
                 return val["companyName"];
             }
 
-            if(objectName === "Opportunity" && fieldName === "relatedAccount"){
+            if(entityName === "Opportunity" && fieldName === "relatedAccount"){
                 return val["companyName"];
             }
 
-            if(objectName === "Case" && fieldName === "relatedAccount"){
+            if(entityName === "Case" && fieldName === "relatedAccount"){
                 return val["companyName"];
             }
 
-            if(objectName === "Case" && fieldName === "relatedContact"){
+            if(entityName === "Case" && fieldName === "relatedContact"){
                 return val["firstName"] + " " + val["lastName"];
             }
 
-            if(objectName === "Task" && fieldName === "relatedLead"){
+            if(entityName === "Task" && fieldName === "relatedLead"){
                 return val["companyName"];
             }
 
-            if(objectName === "Task" && fieldName === "relatedOpportunity"){
+            if(entityName === "Task" && fieldName === "relatedOpportunity"){
                 return val["title"];
             }
 
-            if(objectName === "Call" && fieldName === "relatedAccount"){
+            if(entityName === "Call" && fieldName === "relatedAccount"){
                 return val["companyName"];
             }
 
-            if(objectName === "Call" && fieldName === "relatedCase"){
+            if(entityName === "Call" && fieldName === "relatedCase"){
                 return val["title"];
             }
 
-            if(objectName === "Account" && fieldName === "parentLead"){
+            if(entityName === "Account" && fieldName === "parentLead"){
                 return val["companyName"];
             }
 

@@ -34,3 +34,16 @@ body{
   /* text-decoration: underline; */
   border-bottom: 1px solid blue;
 }
+
+.welcome-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  margin-top: 20px;
+  padding: 30px;
+}
+
+.welcome-container{
+  font-size: 1.2em;
+}

@@ -45,18 +45,17 @@ function EntryPointer({entryId, entryFieldToDisplay, entityName, dataId, bubbleU
     /* use functional form of state update to avoid race conditions,
         react state updates are batched and asynchronous */
     function parseOptions(records){
-        // const comboboxOptions = []; // default value
-        // for(let record of records){
-        //     if(record.id !== entryId){
-        //         comboboxOptions.push({key: record.id, value: record.id, text: getComboboxOptionDisplayLabel(record)})
-        //     }
-        // }
-        // setOptionRecords(comboboxOptions);
-
         setOptionRecords(prevOptions => {
             const existingIds = new Set(prevOptions.map(option => option.key));
             const newOptions = records.filter(record => !existingIds.has(record.id))
-                                      .map(record => ({ key: record.id, value: record.id, text: getComboboxOptionDisplayLabel(record) }));
+                                    .map(record => (
+                                            { 
+                                                key: record.id,
+                                                value: record.id,
+                                                text: getComboboxOptionDisplayLabel(record)
+                                            }
+                                        )
+                                    );
             
             return [
                 ...prevOptions,
@@ -69,8 +68,6 @@ function EntryPointer({entryId, entryFieldToDisplay, entityName, dataId, bubbleU
     /* use functional form of state update to avoid race conditions,
         react state updates are batched and asynchronous */
     function appendOption(singleRecord){
-        // const comboboxOptions = [...optionRecords, {key: singleRecord.id, value: singleRecord.id, text: getComboboxOptionDisplayLabel(singleRecord)}];
-        // setOptionRecords(comboboxOptions);
         setOptionRecords(prevOptions => {
             if (prevOptions.some(option => option.key === singleRecord.id)) {
                 return prevOptions;

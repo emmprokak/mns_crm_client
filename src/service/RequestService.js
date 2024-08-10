@@ -20,52 +20,52 @@ class RequestService{
         return await this.getAllRecords("lead")
      }
 
-    static async getAllRecords(objectName){
-        if(objectName === "overview")
+    static async getAllRecords(entityName){
+        if(entityName === "overview")
             return;
 
-        const request = RequestConstructor.getEntityAllRecordsRequest(this.IP_ADDRESS, this.PORT, this.PROTOCOL, objectName);
+        const request = RequestConstructor.getEntityAllRecordsRequest(this.IP_ADDRESS, this.PORT, this.PROTOCOL, entityName);
 
         const response =  await RequestUtil.makeHttpRequest(request);
         return response.data;
     }
 
-    static async getSingleRecord(objectName, recordId){
-        const request = RequestConstructor.getEntitySingleRecordRequest(this.IP_ADDRESS, this.PORT, this.PROTOCOL, objectName.toLowerCase(), recordId);
+    static async getSingleRecord(entityName, recordId){
+        const request = RequestConstructor.getEntitySingleRecordRequest(this.IP_ADDRESS, this.PORT, this.PROTOCOL, entityName.toLowerCase(), recordId);
     
         const response = await RequestUtil.makeHttpRequest(request);
         return response.data;
     }
 
-    static async getSingleRecordComplete(objectName, recordId){
-        const request = RequestConstructor.getEntitySingleRecordCompleteRequest(this.IP_ADDRESS, this.PORT, this.PROTOCOL, objectName.toLowerCase(), recordId);
+    static async getSingleRecordComplete(entityName, recordId){
+        const request = RequestConstructor.getEntitySingleRecordCompleteRequest(this.IP_ADDRESS, this.PORT, this.PROTOCOL, entityName.toLowerCase(), recordId);
     
         const response = await RequestUtil.makeHttpRequest(request);
         return response.data;
     }
 
-    static async getLastModifiedRecords(objectName, limitNumber, orderByField, orderType){
-        const request = RequestConstructor.getEntityRecordsRequestLimit(this.IP_ADDRESS, this.PORT, this.PROTOCOL, objectName, limitNumber, orderByField, orderType);
+    static async getLastModifiedRecords(entityName, limitNumber, orderByField, orderType){
+        const request = RequestConstructor.getEntityRecordsRequestLimit(this.IP_ADDRESS, this.PORT, this.PROTOCOL, entityName, limitNumber, orderByField, orderType);
         const response = await RequestUtil.makeHttpRequest(request);
         return response.data;
     }
 
-    static async sendCreateEntry(objectName, entry){
-        const request = RequestConstructor.getEntityCreateRequest(this.IP_ADDRESS, this.PORT, this.PROTOCOL, objectName);
+    static async sendCreateEntry(entityName, entry){
+        const request = RequestConstructor.getEntityCreateRequest(this.IP_ADDRESS, this.PORT, this.PROTOCOL, entityName);
         Logger.log(`create req = ${request}`)
         const response = await RequestUtil.makeHttpRequest(request, "POST", entry);
         return response;
     }
 
-    static async sendUpdateEntry(objectName, entry){
-        const request = RequestConstructor.getEntityUpdateRequest(this.IP_ADDRESS, this.PORT, this.PROTOCOL, objectName, entry.id);
+    static async sendUpdateEntry(entityName, entry){
+        const request = RequestConstructor.getEntityUpdateRequest(this.IP_ADDRESS, this.PORT, this.PROTOCOL, entityName, entry.id);
         Logger.log(`update req = ${request}`)
         const response = await RequestUtil.makeHttpRequest(request, "PUT", entry);
         return response;
     }
 
-    static async sendDeleteEntry(objectName, entry){
-        const request = RequestConstructor.getEntityDeleteRequest(this.IP_ADDRESS, this.PORT, this.PROTOCOL, objectName, entry.id);
+    static async sendDeleteEntry(entityName, entry){
+        const request = RequestConstructor.getEntityDeleteRequest(this.IP_ADDRESS, this.PORT, this.PROTOCOL, entityName, entry.id);
         Logger.log(`del req = ${request}`)
         const response = await RequestUtil.makeHttpRequest(request, "DELETE");
         return response;

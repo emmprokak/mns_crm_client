@@ -3,18 +3,18 @@ import Parse from "../transform/Parse";
 import "./css/EntityPage.css";
 import EntityAction from "./EntityAction";
 
-function EntityHeader({objectName, record, fieldCollection, entryActionClicked}){
+function EntityHeader({entityName, record, fieldCollection, entryActionClicked}){
 
     const viewableFields = ["companyName", "description", "website", "firstName", "lastName", "contactPerson", "status", "agentName", "customerPhone", "category"];
     const standardActions = ["Create", "Update", "Delete"];
 
     function actionClicked(actionType){
-        entryActionClicked(objectName, record, actionType);
+        entryActionClicked(entityName, record, actionType);
     }
 
     function renderLeadConversionAction(){
-        if(objectName === "Lead" && record["status"] === "Success"){
-            return <EntityAction key="leadConversion" objectName={objectName}
+        if(entityName === "Lead" && record["status"] === "Success"){
+            return <EntityAction key="leadConversion" entityName={entityName}
               entryId={record["id"]} actionLabel="Convert" actionClicked={actionClicked}/>;
         }
 
@@ -26,7 +26,7 @@ function EntityHeader({objectName, record, fieldCollection, entryActionClicked})
         <div className="header-top-container">
             <div className="entity-header">
                 <div className="entity-header-object">
-                    {Parse.firstLetterCapital(objectName)} <span style={{fontSize: "0.7em"}}>({record["id"]})</span> 
+                    {Parse.firstLetterCapital(entityName)} <span style={{fontSize: "0.7em"}}>({record["id"]})</span> 
                 </div>
 
                 <div className="entity-header-preview-fields">
@@ -47,7 +47,7 @@ function EntityHeader({objectName, record, fieldCollection, entryActionClicked})
             <div className="actions-container">
                 {
                     standardActions.map(act => (
-                        <EntityAction key={act} objectName={objectName} entryId={record["id"]} actionLabel={act} actionClicked={actionClicked}/>
+                        <EntityAction key={act} entityName={entityName} entryId={record["id"]} actionLabel={act} actionClicked={actionClicked}/>
                     ))
                 }
 

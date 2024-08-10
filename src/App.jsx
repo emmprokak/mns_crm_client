@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
-import { Grid, GridColumn, Header, List, Menu, MenuItem } from 'semantic-ui-react';
+import { Container, Grid, GridColumn, Header, List, Menu, MenuItem } from 'semantic-ui-react';
 import RequestService from './service/RequestService';
 import TabularView from './components/TabularView';
 import { Logger } from './service/Logger';
@@ -45,10 +45,10 @@ function App() {
     setRecords(recordsCollection);
   }
 
-  function recordClicked(fieldName, objectName, recordId){
+  function recordClicked(fieldName, entityName, recordId){
     setSingleRecordView(true);
     setCurrentObjectId(recordId);
-    setCurrentObjectName(objectName);
+    setCurrentObjectName(entityName);
   }
 
   async function displayedRecordChanged(event){
@@ -92,8 +92,7 @@ function App() {
       {
         singleRecordView ? 
         <div>
-          <EntityPage objectName={currentObjectName} entryId={currentObjectId} bubbleUpEntryIdChange={displayedRecordChanged}/>
-          {/* boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)" */}
+          <EntityPage entityName={currentObjectName} entryId={currentObjectId} bubbleUpEntryIdChange={displayedRecordChanged}/>
         </div>
         :
         <div>
@@ -104,7 +103,36 @@ function App() {
 
       {activeItem !== 'Overview' && !singleRecordView ? 
         <div className='tabular-view-container'>
-          <TabularView recordList={records} objectName={activeItem} recordSelected={recordClicked}/>
+          <TabularView recordList={records} entityName={activeItem} recordSelected={recordClicked}/>
+        </div>
+        :
+        <div>
+        </div>
+      }
+
+      {
+        activeItem === "Overview" && !singleRecordView ?
+        <div className='welcome-container'>
+          <Header as="h1">Welcome to MNS CRM.</Header>
+          <Header as="h2">An implementation made to benchmark Software Design Patterns in CRM systems.</Header>
+
+          <div className='welcome-details-container'>
+            <Container textAlign='start'>The back-end is powered by Java Springboot and the beautiful front-end here is made with ReactJS.</Container>
+            <br />
+            <Container textAlign='start'>This web app is complimentary to the back-end implementation and is intended to provide a visual interface for interacting with the business logic and entities.</Container>
+
+            <br />
+            <Container textAlign='start'>You can use it to navigate different Entities such as Accounts, Contacts, Leads, Opportunities, Cases, VoiceCalls and Tasks</Container>
+     
+            <br />
+            <Container textAlign='start'>By clicking on the Entity names on the navbar, you can navigate to the Tabular View of each Entity. A table containing the relative data will be displayed.</Container>
+           
+            <br />
+            <Container textAlign='start'>From the Tabular View, you can drill down to a specific entry by clicking the link-highlighted attribute. From inside the EntryPage of a specific entry, you
+              will be able to view the entrys data, create a new entry, update the present entry or delete it. After deleting an entry, you will be redirected back the Tabular view for that Entity.
+            </Container>
+          
+          </div>
         </div>
         :
         <div></div>

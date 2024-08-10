@@ -2,7 +2,7 @@ import { Button } from "semantic-ui-react";
 import { Logger } from "../service/Logger";
 import { useEffect } from "react";
 
-function EntityAction({actionLabel, objectName, entryId, actionClicked}){
+function EntityAction({actionLabel, entityName, entryId, actionClicked}){
 
     function performAction(){
         const createNewEntry = () => {
@@ -40,7 +40,7 @@ function EntityAction({actionLabel, objectName, entryId, actionClicked}){
 
     return (
         <div>
-            <Button color='blue' onClick={performAction} style={{marginLeft: "10px"}}>{`${actionLabel} ${objectName}`}</Button>
+            <Button color='blue' onClick={performAction} style={{marginLeft: "10px"}}>{`${actionLabel} ${entityName}`}</Button>
         </div>
     )
 }

@@ -8,7 +8,7 @@ import Parse from "../transform/Parse";
 import ModalController from "./ModalController";
 import TabularModal from "./TabularModal";
 
-function TabularView({recordList, objectName, recordSelected}){
+function TabularView({recordList, entityName, recordSelected}){
     const [noRecordModalOpen, setNoRecordModalOpen] = useState(false);
     const [modalKey, setModalKey] = useState(0);
 
@@ -36,7 +36,7 @@ function TabularView({recordList, objectName, recordSelected}){
         const compositeValue = event.target.id;
         const fieldName = compositeValue.split(":")[0];
         const entryId = compositeValue.split(":")[1];
-        recordSelected(fieldName, objectName, entryId);
+        recordSelected(fieldName, entityName, entryId);
     }
 
     function modalButtonPressed(){
@@ -47,14 +47,13 @@ function TabularView({recordList, objectName, recordSelected}){
     function modalClosed(event){
         setModalKey(modalKey + 1);
         setNoRecordModalOpen(false);
-        recordSelected(null, objectName, event.id);
+        recordSelected(null, entityName, event.id);
     }
 
     return (
 
         <div>
-            <Header as="h2">Viewing {objectName} entries </Header>
-            
+            <Header as="h2">Viewing {entityName} entries </Header>
 
             {
                 recordList?.length > 0 ? 
@@ -80,7 +79,7 @@ function TabularView({recordList, objectName, recordSelected}){
                                 key={"rec" + row["id"] + col}
                             >                                
 
-                                <TabularCell recordObject={row} fieldName={col} cellClicked={fieldClicked} entityName={objectName}/>
+                                <TabularCell recordObject={row} fieldName={col} cellClicked={fieldClicked} entityName={entityName}/>
                                     
                             </Table.Cell>
                             ))
@@ -89,7 +88,7 @@ function TabularView({recordList, objectName, recordSelected}){
                     </Table.Row>
                     ))
                 }
-
+$
                 </TableBody>
 
             </Table>
@@ -100,11 +99,11 @@ function TabularView({recordList, objectName, recordSelected}){
                 <div>
 
                 <span>No records where found</span>
-                    <Button onClick={modalButtonPressed} style={{marginLeft: "20px"}}>Create a {objectName}?</Button>
+                    <Button onClick={modalButtonPressed} style={{marginLeft: "20px"}}>Create a {entityName}?</Button>
                 </div>
 
                 <div>
-                    <TabularModal entityName={objectName} 
+                    <TabularModal entityName={entityName} 
                         childModalClosed={modalClosed} showModal={noRecordModalOpen} modalKey={modalKey}/>
                 </div>
                 

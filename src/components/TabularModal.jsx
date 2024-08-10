@@ -20,7 +20,7 @@ function TabularModal({childModalClosed, entityName, showModal, modalKey}){
                 showModal ?
                 <ModalController modalClosed={tabularModalClosed}
                  triggerButton={null}
-                 objectName={entityName}
+                 entityName={entityName}
                  entry={null}
                  actionType="create"
                  key={modalKey}

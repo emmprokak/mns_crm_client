@@ -14,7 +14,8 @@ function RelatedEntriesGroup({entityName, relationshipName, entryId, relatedEntr
             </div>
 
             <div>
-                <RelatedEntriesTable relationshipName={relationshipName} originEntityName={entityName} recordList={relatedEntriesList} relatedRecordClicked={relatedEntrySelected}/>
+                <RelatedEntriesTable relationshipName={relationshipName} originEntityName={entityName}
+                     recordList={relatedEntriesList} relatedRecordClicked={relatedEntrySelected}/>
             </div>
         </div>
     )

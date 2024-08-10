@@ -40,7 +40,8 @@ function EntityPageField({fieldName, fieldValue, entityName, relatedEntrySelecte
         if(typeof fieldValue === 'object'){
             const [id, displayValue] = Parse.handleObjectValue(fieldValue, fieldName, entityName)
             const relatedObjectType = getRelatedObjectType(fieldValue);
-            return <a onClick={entryObjectSelected} data-id={id} data-object={relatedObjectType} style={{cursor : "pointer"}}>{displayValue}</a>;
+            return <a onClick={entryObjectSelected} data-id={id} data-object={relatedObjectType}
+                 style={{cursor : "pointer"}}>{displayValue}</a>;
         }
 
         return Parse.parseTableValue(fieldValue, fieldName);

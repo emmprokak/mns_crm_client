@@ -19,7 +19,7 @@ import "react-toastify/dist/ReactToastify.css";
 // toast.configure();
 
 
-function ModalController({modalClosed, triggerButton, objectName, entry, actionType, entrySelected}){
+function ModalController({modalClosed, triggerButton, entityName, entry, actionType, entrySelected}){
     const [open, setOpen] = useState(true)
     const [finalEntry, setFinalEntry] = useState(null);
     const [renderLeadConversionResult, setRenderLeadConversionResult] = useState(false);
@@ -59,7 +59,7 @@ function ModalController({modalClosed, triggerButton, objectName, entry, actionT
       let response;
 
       try{
-        response = await action(objectName.toLowerCase(), entryDetails);
+        response = await action(entityName.toLowerCase(), entryDetails);
 
       }catch(err){
         Logger.log(err)
@@ -120,10 +120,10 @@ function ModalController({modalClosed, triggerButton, objectName, entry, actionT
       onOpen={() => setOpen(true)}
       trigger={triggerButton}
     >
-      <ModalHeader>{`${Parse.firstLetterCapital(actionType)} ${objectName}`}</ModalHeader>
+      <ModalHeader>{`${Parse.firstLetterCapital(actionType)} ${entityName}`}</ModalHeader>
       <ModalContent image scrolling>
         
-        <ModalContentHandler entry={entry} actionType={actionType} entryName={objectName}
+        <ModalContentHandler entry={entry} actionType={actionType} entryName={entityName}
           bubbleUpFinalEntry={getUpdatedEntry} entrySelected={relatedEntrySelected}
           showLeadConversionResult={renderLeadConversionResult} leadConversionResultList={leadConversionResult}/>
        

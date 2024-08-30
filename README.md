@@ -1,8 +1,11 @@
-# React + Vite
+# A CRM client Application, written in ReactJS and Vite.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### This ReactJS web app is a SPA for interacting with my MNS CRM Springboot app that can be found here: https://github.com/emmprokak/mns-crm-backend-00
 
-Currently, two official plugins are available:
+It is a part of my master's thesis "Benchmarking Software Design Patterns in CRM Systems".
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Tabular View of Account entries
+<img width="1280" alt="image" src="https://github.com/user-attachments/assets/2ab13486-4401-4474-89cd-72528b962602">
+
+Account Entry Viewpage
+<img width="1678" alt="image" src="https://github.com/user-attachments/assets/75104f60-b89b-45cc-85c3-c2370515a2dd">
